@@ -12,4 +12,6 @@ class DangNhapController extends Controller
     public function DangNhap(){
         return view('admin/dang-nhap');
     }
+    public function DangNhapList(Request $request){
+    }
 }
