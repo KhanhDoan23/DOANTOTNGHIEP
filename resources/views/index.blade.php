@@ -77,5 +77,28 @@
 </main>
 <script src="{{asset('bootstrap-5.2.3/js/bootstrap.bundle.min.js')}}"></script>
 @yield('page')
+@if (session('thong_bao'))
+  <script>
+    Swal.fire({
+      icon:'success',
+      title:"{{session('thong_bao')}}",
+      text:'',
+      footer:'',
+      confirmButtonColor:"#000000"
+    })
+  </script>
+  @endif
+
+  @if (session('error'))
+  <script>
+    Swal.fire({
+      icon:'error',
+      title:"{{session('error')}}",
+      text:'',
+      footer:'',
+      confirmButtonColor:"#000000"
+    })
+  </script>
+  @endif
 </body>
 </html>

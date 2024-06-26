@@ -1,5 +1,6 @@
 @extends('index')
 @section('context')
+<form action="">
 <div id="content">
   <div class="container-fluid">
     <h1 class="mt-4">Quản lý đặt sân</h1>
@@ -48,5 +49,5 @@
     </div>
   </div>
 </div>
-
+</form>
 @endsection
