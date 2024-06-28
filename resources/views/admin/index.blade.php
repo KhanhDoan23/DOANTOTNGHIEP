@@ -6,6 +6,7 @@
   <title>Quản lý đặt sân bóng</title>
   <link href="{{asset('bootstrap-5.2.3/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">  
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -51,31 +52,17 @@
   <div class="sidebar-heading">Quản lý đặt sân bóng</div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href="#" class="text-decoration-none text-white"><i class="fas fa-house-user"></i> Dashboard</a></li>
-    <li class="list-group-item"><a href="{{route('admin.danhsachdatsan')}}" class="text-decoration-none text-white"><i class="far fa-calendar-alt"></i> Quản lý đặt sân</a></li>
-    <li class="list-group-item"><a href="#" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý người dùng</a></li>
-    <li class="list-group-item"><a href="{{route('admin.dang-nhap')}}" class="text-decoration-none text-white"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+    <li class="list-group-item"><a href="{{route('admin.danhsach')}}" class="text-decoration-none text-white"><i class="far fa-calendar-alt"></i> Quản lý đặt sân</a></li>
+    <li class="list-group-item"><a href="{{route('admin.quan-ly-user')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý người dùng</a></li>
+    <li class="list-group-item"><a href="{{route('danh-sach')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý tài khoản admin</a></li>
+    <li class="list-group-item"><a href="{{route('admin.dang-xuat')}}" class="text-decoration-none text-white"><i class="fas fa-sign-in-alt"></i> Đăng Xuất</a></li>
   </ul>
-</div>
-
-<div id="content">
-  <div class="container-fluid">
-    <h1 class="mt-4">Dashboard</h1>
-    <div class="row">
-      <div class="col-lg-6">
-        <h2>Sân bóng đang sử dụng</h2>
-        <p>Đây là phần nội dung quản lý sân bóng.</p>
-      </div>
-      <div class="col-lg-6">
-        <h2>Thống kê</h2>
-        <p>Đây là phần thống kê dữ liệu.</p>
-      </div>
-    </div>
-  </div>
 </div>
 <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
   @yield('content')
 </main>
 <script src="{{asset('bootstrap-5.2.3/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('sweetalert/sweetalert2.all.min.js')}}"></script>
 @yield('page')
 @if (session('thong_bao'))
   <script>

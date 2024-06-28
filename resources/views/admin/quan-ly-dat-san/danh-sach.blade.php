@@ -1,5 +1,5 @@
-@extends('index')
-@section('context')
+@extends('admin.index')
+@section('content')
 <form action="">
 <div id="content">
   <div class="container-fluid">

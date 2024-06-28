@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('signin.css')}}">
 </head>
 <main class="form-signin w-100 m-auto">
-<form method="POST" action="#">
+<form method="POST" action="{{route('admin.xl-dang-nhap')}}">
     @csrf
     <h1 class="h3 mb-3 fw-normal">Đăng Nhập</h1>
 

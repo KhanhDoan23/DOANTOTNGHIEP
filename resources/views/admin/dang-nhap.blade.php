@@ -20,6 +20,11 @@
       <input type="password" class="form-control" id="#" placeholder="Password" name="password">
       <label for="floatingPassword">Mật Khẩu</label>
     </div>
+    @if(session('thong_bao'))
+    <div>
+        <p class="text-danger">{{session('thong_bao')}}</p>
+    </div>
+    @endif
     <div class="form-check text-start my-3">
       <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
       <label class="form-check-label" for="flexCheckDefault">
@@ -27,6 +32,5 @@
       </label>
     </div>
     <button class="btn btn-primary w-100 py-2" type="submit">Đăng Nhập</button>
-    <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
 </form>
 </main>
