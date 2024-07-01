@@ -41,7 +41,27 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
     Route::get('/quan-ly-tai-khoan/thanhvien/xoa/{id}', [QuanLyAdminController::class, 'XoaAdmin'])->name('xoa');
     Route::get('search', [QuanLyAdminController::class, 'Search'])->name('search');
 });
+//User
+Route::group(['prefix' => 'user'],function(){
+    Route::get('/dang-nhap',[DangNhapUserController::class,'dangnhapuser'])->name('user.dang-nhap');
+    Route::get('/dang-xuat',[DangNhapUserController::class,'logout'])->name('user.dang-xuat');
+    Route::get('/verify-account/{email}',[DangNhapUserController::class,'verify'])->name('user.verify');
+    Route::post('/dang-nhap',[DangNhapUserController::class,'check_login'])->name('user.check_login');
 
-Route::get('user/index',[UserController::class,'giaodienuser']);
-Route::get('user/dang-nhap',[DangNhapUserController::class,'dangnhapuser'])->name('user.dang-nhap');
-Route::get('user/dang-ky',[DangNhapUserController::class,'dangky'])->name('user.dang-ky');
+    Route::get('/dang-ky',[DangNhapUserController::class,'dangky'])->name('user.dang-ky');
+    Route::post('/dang-ky',[DangNhapUserController::class,'check_dangky']);
+
+    Route::get('/profile',[DangNhapUserController::class,'profile'])->name('user.profile')->middleware('customer');
+    Route::post('/profile',[DangNhapUserController::class,'check_profile'])->name('user.check-profile')->middleware('customer');
+
+    Route::get('/change-pass',[DangNhapUserController::class,'change_pass'])->name('user.change-pass')->middleware('customer');
+    Route::post('/change-pass',[DangNhapUserController::class,'check_change_pass'])->middleware('customer');
+
+    Route::get('/forgot-pass',[DangNhapUserController::class,'forgot_pass'])->name('user.forgot-pass');
+    Route::post('/forgot-pass',[DangNhapUserController::class,'check_forgot_pass']);
+
+    Route::get('/reset-pass',[DangNhapUserController::class,'reset_pass'])->name('user.reset-pass');
+    Route::post('/reset-pass',[DangNhapUserController::class,'check_reset_pass']);
+});
+Route::get('user/index',[DangNhapUserController::class,'giaodienuser'])->name('user.index');
+

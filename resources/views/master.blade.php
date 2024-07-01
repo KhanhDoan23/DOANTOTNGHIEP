@@ -72,7 +72,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
+          <a class="nav-link active" aria-current="page" href="{{route('user.index')}}">
             <i class="fas fa-home"></i> Trang chủ
           </a>
         </li>
@@ -119,50 +119,9 @@
     </div>
   </div>
 </nav>
-<section class="hero d-flex align-items-center">
-  <div class="gradient-overlay"></div>
-  <div class="container text-center">
-    <h1>Đặt Sân Bóng Đá</h1>
-    <p class="lead">Hãy dễ dàng đặt sân bóng đá của bạn ngay từ bây giờ.</p>
-    <a href="#" class="btn btn-primary btn-lg">Đặt sân ngay</a>
-  </div>
-</section>
-<section class="san-bong py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100 shadow">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Sân A</h5>
-            <p class="card-text">Sân có kích thước lớn, thích hợp cho các trận đấu lớn.</p>
-            <a href="#" class="btn btn-primary">Đặt sân</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100 shadow">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Sân B</h5>
-            <p class="card-text">Sân vừa phải, phù hợp cho các trận giao hữu.</p>
-            <a href="#" class="btn btn-primary">Đặt sân</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100 shadow">
-          <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Sân C</h5>
-            <p class="card-text">Sân nhỏ, thích hợp cho các trận đấu nhóm nhỏ.</p>
-            <a href="#" class="btn btn-primary">Đặt sân</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+  @yield('content')
+</main>
 <footer class="bg-dark text-light text-center py-4">
   <div class="container">
     <div class="row">
@@ -195,9 +154,7 @@
   <hr>
   <p>&copy; 2024 Trang Đặt Sân Bóng Đá. All rights reserved.</p>
 </footer>
-<main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-  @yield('content')
-</main>
+
 <script src="{{asset('bootstrap-5.2.3/js/bootstrap.bundle.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"></script>
 @yield('page')

@@ -14,10 +14,10 @@ class ThemAdminSeeder extends Seeder
     public function run(): void
     {
         $admin = new DangNhap();
-        $admin->ten           = "Quản Lý";
+        $admin->ten           = "Đoàn Tuấn Khanh";
         $admin->ten_dang_nhap = "TuanKhanh34";
         $admin->password      = Hash::make('abcxyz');
-        $admin->quyen_id      = 2;
+        $admin->quyen_id      = 1;
         $admin->save();
     }
 }

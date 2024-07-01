@@ -3,10 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class DangNhapUser extends Model
+class DangNhapUser extends Authenticatable
 {
     use HasFactory;
-    protected $table="dang_nhap";
+
+    protected $table = "user";
+
+    protected $fillable = [
+        'ho_ten',
+        'email',
+        'password',
+        'so_dien_thoai',
+    ];
+
 }
