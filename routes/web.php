@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 //Admin
 Route::get('admin/dang-nhap', [DangNhapController::class, 'DangNhap'])->name('admin.dang-nhap');
-Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap']);
+Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap'])->name('admin.dang-nhap');
 
 Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
     Route::get('/index',[DangNhapController::class,'index'])->name('admin.index');
