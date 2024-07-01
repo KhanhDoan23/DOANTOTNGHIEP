@@ -12,9 +12,9 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Họ và tên:</label>
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control" name="name" value="{{$auth->ho_ten }}" required>
+                            <input id="name" type="text" class="form-control" name="ho_ten" value="{{$auth->ho_ten }}" required>
                         </div>
-                        @error('name')
+                        @error('ho_ten')
                                 <div class="help-block">{{$message}}</div>
                         @enderror
                     </div>
@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">Email:</label>
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $auth -> email }}" required>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ $auth -> email }}" readonly>
                             @error('email')
                                 <div class="help-block">{{$message}}</div>
                             @enderror
@@ -32,7 +32,7 @@
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Phone:</label>
                         <div class="col-md-6">
                             <input id="email" type="text" class="form-control" name="so_dien_thoai" value="{{ $auth -> so_dien_thoai }}" required>
-                            @error('phone')
+                            @error('so_dien_thoai')
                                 <div class="help-block">{{$message}}</div>
                             @enderror
                         </div>

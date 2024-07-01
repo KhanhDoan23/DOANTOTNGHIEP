@@ -6,7 +6,7 @@
   <title>Trang Đặt Sân Bóng Đá</title>
   <link href="{{asset('bootstrap-5.2.3/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" />
   <style>
     .navbar-brand img {
@@ -100,7 +100,7 @@
         </li>
        <li class="nav-item">
           <a class="nav-link" href="{{route('user.profile')}}">
-            Hi,{{auth('cus')->user()->ho_ten}}
+          <i class="fas fa-user"></i> Hi,{{auth('cus')->user()->ho_ten}}
           </a>
         </li>
        @else

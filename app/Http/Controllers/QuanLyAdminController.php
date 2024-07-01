@@ -95,7 +95,7 @@ class QuanLyAdminController extends Controller
         ->paginate($Page);
 
 
-        return view('admin//quan-ly-tai-khoan/thanhvien/danh-sach', compact('dsAdmin','Page'));
+        return view('admin/quan-ly-tai-khoan/thanhvien/danh-sach', compact('dsAdmin','Page'));
     } 
 
 }

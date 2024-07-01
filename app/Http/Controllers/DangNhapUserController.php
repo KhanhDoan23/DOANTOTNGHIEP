@@ -34,7 +34,7 @@ class DangNhapUserController extends Controller
         $check = auth('cus')->attempt($data);
         
         if ($check) {
-            if (auth('cus')->user()->email_verified_at == null) {
+            if (auth('cus')->user()->email_verified_at == '') {
                 auth('cus')->logout();
                 return redirect()->back()->with('error', 'Tài khoản của bạn chưa được xác nhận');
             }

@@ -6,7 +6,7 @@
         <div> 
             <a href="{{route('them-moi')}}"><button type="button" class="btn btn-info">Thêm Mới</button></a>
         </div>
-        <form class="form-inline" action="{{ route('search') }}" method="GET">
+        <form class="form-inline" action="{{ route('admin.search') }}" method="GET">
             <div class="input-group">
                 <input type="text" class="form-control" style="max-width: 400px;" name="query" placeholder="Search for products">
                 <div class="input-group-append">
@@ -47,7 +47,7 @@
                 @else
                     <td>Admin</td> 
                 @endif
-                @if ($admin->quyen_id == 1)
+                @if ($admin->quyen->ten_quyen === 'Chủ')
                     <td>Tài Khoản Gốc</td>
                 @else
                 <td><a href="{{route('cap-nhat',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Sửa</button></a>|<a href="{{route('xoa',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Xóa</button></a></td>
