@@ -68,7 +68,7 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('quan-ly-tai-khoan-admin', function (DangNhap $admin) {
-            return $admin->quyen->ten_quyen === 'Quản Lý';
+            return $admin->quyen->ten_quyen === 'Chủ';
         });
     
         // Gate::define('quan-ly-tai-khoan-nguoi-dung', function (DangNhap $admin) {

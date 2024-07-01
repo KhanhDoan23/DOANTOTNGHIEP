@@ -16,14 +16,15 @@
             <h4 class="mb-0">Đăng Ký</h4>
           </div>
           <div class="card-body">
-            <form action="#" method="POST">
+            <form action="" method="POST">
+              @csrf
               <div class="form-group">
                 <label for="fullName">Họ và tên</label>
-                <input type="text" class="form-control" id="fullName" name="fullName" required>
+                <input type="text" class="form-control" id="fullName" name="ho_ten" required>
               </div>
               <div class="form-group">
                 <label for="phoneNumber">Số điện thoại</label>
-                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10,11}" required>
+                <input type="tel" class="form-control" id="phoneNumber" name="so_dien_thoai" pattern="[0-9]{10,11}" required>
                 <small id="phoneHelp" class="form-text text-muted">Vui lòng nhập số điện thoại hợp lệ (10 hoặc 11 số).</small>
               </div>
               <div class="form-group">
@@ -31,16 +32,21 @@
                 <input type="email" class="form-control" id="email" name="email" required>
               </div>
               <div class="form-group">
-                <label for="username">Tên đăng nhập</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-              </div>
-              <div class="form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Nhập Lại Mật khẩu</label>
+                <input type="password" class="form-control" id="password" name="confirm_password" required>
               </div>
               <div>
                 <a href="{{route('user.dang-nhap')}}">nếu đã có tài khoản vui lòng đăng nhập?</a>
               </div>
+              @if(session('thong_bao'))
+              <div>
+                  <p class="text-danger">{{session('thong_bao')}}</p>
+              </div>
+              @endif
               <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
           </div>
@@ -49,8 +55,6 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{{asset('bootstrap-5.2.3/js/bootstrap.min.js')}}"></script>
 </body>
 </html>
