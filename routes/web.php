@@ -4,9 +4,11 @@ use App\Http\Controllers\DangNhapController;
 use App\Http\Controllers\DangNhapUserController;
 use App\Http\Controllers\QuanLyDatSanController;
 use App\Http\Controllers\QuanLyUser;
+use App\Http\Controllers\QuanLySanBongController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\QuanLyAdminController;
+use App\Models\SanBong;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,15 +33,27 @@ Route::post('admin/dang-nhap', [DangNhapController::class, 'XuLyDangNhap'])->nam
 Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
     Route::get('/index',[DangNhapController::class,'index'])->name('admin.index');
     Route::get('/dang-xuat', [DangNhapController::class, 'DangXuat'])->name('admin.dang-xuat');
+    Route::get('/quan-ly-san-bong/danh-sach',[QuanLySanBongController::class,'DanhSach'])->name('admin.danh-sach-san-bong');
+    //quản lí đặt sân
     Route::get('/quan-ly-dat-san/danh-sach',[QuanLyDatSanController::class,'DanhSach'])->name('admin.danhsach');
+    //quản lí tài khoản
     Route::get('/quan-ly-tai-khoan/quan-ly-user',[QuanLyUser::class,'DanhSachKhachHang'])->name('admin.quan-ly-user');
     Route::get('/quan-ly-tai-khoan/thanhvien/them-moi', [QuanLyAdminController::class, 'ThemMoiAdmin'])->name('them-moi');
     Route::post('/quan-ly-tai-khoan/thanhvien/them-moi', [QuanLyAdminController::class, 'XuLyThemMoiAdmin'])->name('xl-them-moi');
     Route::get('/quan-ly-tai-khoan/thanhvien/danh-sach', [QuanLyAdminController::class, 'DanhSachAdmin'])->name('danh-sach');
     Route::get('/quan-ly-tai-khoan/thanhvien/cap-nhat/{id}', [QuanLyAdminController::class, 'CapNhatAdmin'])->name('cap-nhat');
     Route::post('/quan-ly-tai-khoan/thanhvien/cap-nhat/{id}', [QuanLyAdminController::class, 'XuLyCapNhatAdmin'])->name('xl-cap-nhat');
+
     Route::get('/quan-ly-tai-khoan/thanhvien/xoa/{id}', [QuanLyAdminController::class, 'XoaAdmin'])->name('xoa');
     Route::get('search', [QuanLyAdminController::class, 'Search'])->name('search');
+    //quản lí sân bóng
+    Route::get('san-bong', [SanBong::class, 'DanhSach'])->name('quan-li-san-bong.danh-sach');
+    Route::get('san-bong/them-moi', [SanBong::class, 'ThemMoi'])->name('quan-li-san-bong.them-moi');
+    Route::post('san-bong/them-moi', [SanBong::class, 'XuLyThemMoi'])->name('quan-li-san-bong.xu-ly-them-moi');
+    Route::get('san-bong/cap-nhat/{id}', [SanBong::class, 'CapNhat'])->name('quan-li-san-bong.cap-nhat');
+    Route::post('san-bong/cap-nhat/{id}', [SanBong::class, 'XuLyCapNhat'])->name('quan-li-san-bong.xu-ly-cap-nhat');
+    
+    Route::get('san-bong/xoa/{id}', [SanBong::class, 'Xoa'])->name('quan-li-san-bong.xoa');
 });
 //User
 Route::group(['prefix' => 'user'],function(){
