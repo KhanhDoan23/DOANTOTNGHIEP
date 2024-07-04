@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{route('user.tin-tuc.hien-thi')}}">
             <i class="fas fa-info-circle"></i> Tin Tức
           </a>
         </li>
@@ -106,12 +106,12 @@
        @else
        <li class="nav-item">
           <a class="nav-link" href="{{route('user.dang-nhap')}}">
-            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            <i class="fas fa-user"></i> Đăng nhập
           </a>
         </li>
        <li class="nav-item">
           <a class="nav-link" href="{{route('user.dang-ky')}}">
-            <i class="fas fa-sign-in-alt"></i> Đăng ký
+            <i class="fas fa-user"></i> Đăng ký
           </a>
         </li>
        @endif

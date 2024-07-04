@@ -1,6 +1,9 @@
-@extends('layouts.app')
+@extends('admin.index')
 
 @section('content')
+<div id="content">
+<div class="table-responsive">
+        <table class="table table-striped table-sm" border="1">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 margin-tb">
@@ -8,7 +11,7 @@
                     <h2>Sửa tin tức</h2>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('news.index') }}"> Quay lại</a>
+                    <a class="btn btn-primary" href="{{ route('tin-tuc.danh-sach') }}"> Quay lại</a>
                 </div>
             </div>
         </div>
@@ -24,7 +27,7 @@
             </div>
         @endif
 
-        <form action="{{ route('news.update',$news->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('tin-tuc.xl-cap-nhat',$news->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -32,13 +35,25 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Tiêu đề:</strong>
-                        <input type="text" name="title" value="{{ $news->title }}" class="form-control" placeholder="Tiêu đề">
+                        <input type="text" name="tieu_de" value="{{ $news->tieu_de }}" class="form-control" placeholder="Tiêu đề">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Mô tả ngắn:</strong>
+                        <input type="text" name="mo_ta_ngan" value="{{ $news->mo_ta_ngan }}" class="form-control" placeholder="Mô tả ngắn">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Ngày cập nhật:</strong>
+                        <input type="datetime" name="ngay_dang" value="{{ $news->ngay_dang }}" class="form-control" placeholder="Ngày đăng" readonly>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Nội dung:</strong>
-                        <textarea class="form-control" style="height:150px" name="content" placeholder="Nội dung">{{ $news->content }}</textarea>
+                        <textarea class="form-control" style="height:150px" name="noi_dung" placeholder="Nội dung">{{ $news->noi_dung }}</textarea>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -64,4 +79,6 @@
 
         </form>
     </div>
+    </table>
+</div></div>
 @endsection

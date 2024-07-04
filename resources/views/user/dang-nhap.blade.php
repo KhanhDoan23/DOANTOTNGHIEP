@@ -14,17 +14,23 @@
 
     <div class="form-floating">
       <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+      @error('email')
+                <div class="alert alert-warring">{{$message}}</div>
+      @enderror
       <label for="floatingInput">Email của bạn</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+        @error('password')
+                <div class="alert alert-warring">{{$message}}</div>
+        @enderror
       <label for="floatingPassword">Mật Khẩu</label>
     </div>
-    @if(session('thong_bao'))
-    <div>
-        <p class="text-danger">{{session('thong_bao')}}</p>
-    </div>
-    @endif
+    @if ($message = Session::get('thong_bao'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
      
     <button class="btn btn-primary w-100 py-2" type="submit">Đăng Nhập</button>
     <a style="display: block; text-align: center; margin-top: 15px;" href="{{route('user.dang-ky')}}">Tạo tài khoản mới.</a>

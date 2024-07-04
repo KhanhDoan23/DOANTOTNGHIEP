@@ -72,7 +72,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
+          <a class="nav-link active" aria-current="page" href="{{route('user.index')}}">
             <i class="fas fa-home"></i> Trang chủ
           </a>
         </li>
@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{route('user.tin-tuc.hien-thi')}}">
             <i class="fas fa-info-circle"></i> Tin Tức
           </a>
         </li>
@@ -95,7 +95,7 @@
        @if(auth('cus')->check())
        <li class="nav-item">
           <a class="nav-link" href="{{route('user.dang-xuat')}}">
-            <i class="fas fa-sign-in-alt"></i> Đăng xuất
+            <i class="fas fa-user"></i> Đăng xuất
           </a>
         </li>
        <li class="nav-item">
@@ -106,7 +106,7 @@
        @else
        <li class="nav-item">
           <a class="nav-link" href="{{route('user.dang-nhap')}}">
-            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            <i class="fas fa-user"></i> Đăng nhập
           </a>
         </li>
        <li class="nav-item">

@@ -35,24 +35,36 @@
                     <div class="form-group">
                         <strong>Tiêu đề:</strong>
                         <input type="text" name="tieu_de" class="form-control" placeholder="Tiêu đề">
+                        @error('tieu_de')
+                                <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Mô tả ngắn:</strong>
                         <textarea class="form-control" style="height:150px" name="mo_ta_ngan" placeholder="Nội dung"></textarea>
+                        @error('mo_ta_ngan')
+                                <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Nội dung:</strong>
                         <textarea class="form-control" style="height:150px" name="noi_dung" placeholder="Nội dung"></textarea>
+                        @error('noi_dung')
+                                <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Hình ảnh:</strong>
                         <input type="file" name="image" class="form-control-file">
+                        @error('image')
+                                <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
