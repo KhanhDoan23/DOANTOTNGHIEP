@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KhanhHang extends Model
+class TinTuc extends Model
 {
     use HasFactory;
-
-    protected $table="user";
+    protected $table="tin_tuc";
 }

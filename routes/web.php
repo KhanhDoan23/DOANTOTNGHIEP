@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 use App\Http\Controllers\DangNhapController;

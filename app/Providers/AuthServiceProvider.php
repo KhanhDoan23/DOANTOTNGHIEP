@@ -71,12 +71,12 @@ class AuthServiceProvider extends ServiceProvider
             return $admin->quyen->ten_quyen === 'Chủ';
         });
     
-        // Gate::define('quan-ly-tai-khoan-nguoi-dung', function (DangNhap $admin) {
-        //     if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
+        Gate::define('quan-ly-tai-khoan-nguoi-dung', function (DangNhap $admin) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý'  || $admin->quyen->ten_quyen === 'Chủ') {
+                return true;
+            }
+            return false;
+        });
 
     }
 }

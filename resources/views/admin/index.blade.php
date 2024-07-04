@@ -44,18 +44,25 @@
       margin-left: 260px;
       padding: 20px;
     }
+    .navbar-brand img {
+      max-height: 40px;
+      border-radius: 50%; 
+    }
   </style>
 </head>
 <body>
 
 <div id="sidebar">
-  <div class="sidebar-heading">Quản lý đặt sân bóng</div>
+  <a class="navbar-brand" href="#">
+      <img src="{{asset('img/logo-web.jpg')}}" alt="Logo" class="img-fluid">
+ Quản lý đặt sân bóng </a>
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href="#" class="text-decoration-none text-white"><i class="fas fa-house-user"></i> Dashboard</a></li>
     <li class="list-group-item"><a href="{{route('admin.danhsach')}}" class="text-decoration-none text-white"><i class="far fa-calendar-alt"></i> Quản lý đặt sân</a></li>
     <li class="list-group-item"><a href="{{route('admin.danh-sach-san-bong')}}" class="text-decoration-none text-white"><i class="fa fa-columns"></i></i> Quản lý sân bóng</a></li>
     <li class="list-group-item"><a href="{{route('admin.quan-ly-user')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý người dùng</a></li>
     <li class="list-group-item"><a href="{{route('danh-sach')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý tài khoản admin</a></li>
+    <li class="list-group-item"><a href="{{route('tin-tuc.danh-sach')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý tài khoản tin tức</a></li>
     <li class="list-group-item"><a href="{{route('admin.dang-xuat')}}" class="text-decoration-none text-white"><i class="fas fa-sign-in-alt"></i> Đăng Xuất</a></li>
   </ul>
 </div>
