@@ -70,6 +70,7 @@ class DangNhapUserController extends Controller
         }
         return redirect()->back()->with('No','Vui lòng thử lại');
     }
+    
     public function verify($email)
     {
         $acc=DangNhapUser::where('email',$email)->whereNull('email_verified_at')->firstOrFail();

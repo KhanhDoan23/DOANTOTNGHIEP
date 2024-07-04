@@ -48,7 +48,7 @@
                     <td>Admin</td> 
                 @endif
                 @if ($admin->quyen->ten_quyen === 'Chủ')
-                    <td>Tài Khoản Gốc</td>
+                    <td><span class="badge bg-warning text-dark">Tài Khoản Gốc</span></td>
                 @else
                 <td><a href="{{route('cap-nhat',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Sửa</button></a>|<a href="{{route('xoa',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Xóa</button></a></td>
                 @endif

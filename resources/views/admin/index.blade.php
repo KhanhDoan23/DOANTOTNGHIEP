@@ -57,7 +57,12 @@
       <img src="{{asset('img/logo-web.jpg')}}" alt="Logo" class="img-fluid">
  Quản lý đặt sân bóng </a>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="#" class="text-decoration-none text-white"><i class="fas fa-house-user"></i> Dashboard</a></li>
+      <li class="list-group-item">
+          <a class="text-decoration-none text-white" href="#">
+          <i class="fas fa-user"></i> Hi, {{auth('web')->user()->ten}}
+          </a>
+      </li>
+    <li class="list-group-item"><a href="{{route('admin.index')}}" class="text-decoration-none text-white"><i class="fas fa-house-user"></i> Dashboard</a></li>
     <li class="list-group-item"><a href="{{route('admin.danhsach')}}" class="text-decoration-none text-white"><i class="far fa-calendar-alt"></i> Quản lý đặt sân</a></li>
     <li class="list-group-item"><a href="{{route('admin.danh-sach-san-bong')}}" class="text-decoration-none text-white"><i class="fa fa-columns"></i></i> Quản lý sân bóng</a></li>
     <li class="list-group-item"><a href="{{route('admin.quan-ly-user')}}" class="text-decoration-none text-white"><i class="fas fa-users"></i> Quản lý người dùng</a></li>
