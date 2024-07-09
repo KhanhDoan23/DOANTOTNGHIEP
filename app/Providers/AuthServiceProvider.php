@@ -46,21 +46,21 @@ class AuthServiceProvider extends ServiceProvider
         //     return false;
         // });
     
-        // Gate::define('quan-ly-hoa-don-xuat', function (DangNhap $admin) {
-        //     if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Hóa Đơn Xuất' ||  $admin->quyen->ten_quyen === 'Quản Lý') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
-        // Gate::define('quan-ly-binh-luan', function (DangNhap $admin) {
-        //     if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Bình Luận' || $admin->quyen->ten_quyen === 'Quản Lý') {
-        //         return true;
-        //     }
-        //     return false;
-        // });
+        Gate::define('quan-ly-thanh-toan', function (DangNhap $admin) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Nhân Viên Thu Ngân' ||  $admin->quyen->ten_quyen === 'Admin') {
+                return true;
+            }
+            return false;
+        });
+        Gate::define('quan-ly-dat-san', function (DangNhap $admin) {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Admin' || $admin->quyen->ten_quyen === 'Nhân Viên') {
+                return true;
+            }
+            return false;
+        });
     
         Gate::define('quan-ly-tin-tuc', function (DangNhap $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tin Tức' ||  $admin->quyen->ten_quyen === 'Chủ') {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Nhân Viên' ||  $admin->quyen->ten_quyen === 'Admin') {
                 return true;
             }
             return false;
@@ -68,11 +68,11 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::define('quan-ly-tai-khoan-admin', function (DangNhap $admin) {
-            return $admin->quyen->ten_quyen === 'Chủ';
+            return $admin->quyen->ten_quyen === 'Admin';
         });
     
         Gate::define('quan-ly-tai-khoan-nguoi-dung', function (DangNhap $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý'  || $admin->quyen->ten_quyen === 'Chủ') {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý'  || $admin->quyen->ten_quyen === 'Admin') {
                 return true;
             }
             return false;

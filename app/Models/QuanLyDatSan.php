@@ -9,17 +9,27 @@ class QuanLyDatSan extends Model
 {
     use HasFactory;
     protected $table="dat_san";
-
-    public function khachhang()
+    protected $fillable = ['tong_tien'
+    ];
+    public function user()
     {
         return $this->belongsTo(KhachHang::class);
     }
-    public function trangthai()
+   
+    public function san_bong()
     {
-        return $this->belongsTo(TrangThai::class);
+        return $this->belongsTo(SanBong::class);
     }
-    public function sanbong()
+    public function gia_thue()
     {
-        return $this->belongsTo(SanBongDa::class);
+        return $this->belongsTo(GiaThue::class);
+    }
+    public function trang_thai_dat_san()
+    {
+        return $this->belongsto(TrangThai::class);
+    }
+    public function thanhToan()
+    {
+        return $this->hasOne(ThanhToan::class, 'dat_san_id', 'id');
     }
 }

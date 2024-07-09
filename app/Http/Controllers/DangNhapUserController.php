@@ -68,7 +68,7 @@ class DangNhapUserController extends Controller
             Mail::to($acc->email)->send(new VerifyAccount($acc));
             return redirect()->route('user.dang-nhap')->with('thong_bao', 'Đăng ký thành công, vui lòng check mail để đăng nhập');
         }
-        return redirect()->back()->with('No','Vui lòng thử lại');
+        return redirect()->back()->with('error','Vui lòng thử lại');
     }
     
     public function verify($email)

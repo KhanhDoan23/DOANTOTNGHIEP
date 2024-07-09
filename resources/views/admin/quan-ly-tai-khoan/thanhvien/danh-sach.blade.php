@@ -17,7 +17,7 @@
 
         <h3>Danh Sách Tài Khoản Admin</h3>
         <form class="form-inline" method="get" action="{{ route('danh-sach') }}">
-            <div class="form-group" style="max-width: 200px;">
+            <div class="form-group" style="max-width: 70px; text-align:center;">
                 <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
                     <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
@@ -32,6 +32,8 @@
           <thead>
             <tr>
                 <th>Tên</td>
+                <th>Địa Chỉ</td>
+                <th>Email</td>
                 <th>Tên Đăng Nhập</th>
                 <th>Quyền</th>
                 <th>Thao Tác</th>
@@ -41,13 +43,15 @@
             @foreach($dsAdmin as $admin)
             <tr>
                 <td>{{ $admin->ten }}</td>
+                <td>{{ $admin->dia_chi }}</td>
+                <td>{{ $admin->email }}</td>
                 <td>{{ $admin->ten_dang_nhap }}</td>
                 @if ($admin->quyen)
                     <td>{{ $admin->quyen->ten_quyen }}</td>
                 @else
                     <td>Admin</td> 
                 @endif
-                @if ($admin->quyen->ten_quyen === 'Chủ')
+                @if ($admin->quyen_id === 4)
                     <td><span class="badge bg-warning text-dark">Tài Khoản Gốc</span></td>
                 @else
                 <td><a href="{{route('cap-nhat',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Sửa</button></a>|<a href="{{route('xoa',['id'=>$admin->id])}}"><button type="button" class="btn btn-success">Xóa</button></a></td>

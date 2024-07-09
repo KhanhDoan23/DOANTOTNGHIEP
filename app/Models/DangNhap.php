@@ -12,8 +12,9 @@ class DangNhap extends Authenticatable
 
     protected $fillable = [
         'ten',
+        'dia_chi',
+        'email',
         'ten_dang_nhap',
-        'password',
         'quyen_id'
     ];
 

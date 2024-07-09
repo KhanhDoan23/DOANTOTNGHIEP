@@ -30,7 +30,7 @@
             <div class="alert alert-success">
                 <p>{{ $message }}</p>
             </div>
-        @endif
+    @endif
      
     <button class="btn btn-primary w-100 py-2" type="submit">Đăng Nhập</button>
     <a style="display: block; text-align: center; margin-top: 15px;" href="{{route('user.dang-ky')}}">Tạo tài khoản mới.</a>

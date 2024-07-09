@@ -47,12 +47,10 @@ class TinTucController extends Controller
         $news->mo_ta_ngan=$request->mo_ta_ngan;
         $news->noi_dung = $request->noi_dung;
         $news->ngay_dang = now();
-
-        // Xử lý lưu hình ảnh nếu có được tải lên
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName); // Lưu hình ảnh vào thư mục public/images
+            $image->move(public_path('images'), $imageName);
             $news->image = 'images/'.$imageName;
         }
 
@@ -85,7 +83,7 @@ class TinTucController extends Controller
             'tieu_de' => 'required',
             'mo_ta_ngan' => 'required',
             'noi_dung' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh có đúng định dạng và kích thước
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
         $news = TinTuc::findOrFail($id);
@@ -93,12 +91,10 @@ class TinTucController extends Controller
         $news->mo_ta_ngan=$request->mo_ta_ngan;
         $news->noi_dung = $request->noi_dung;
         $news->ngay_dang = now();
-
-        // Xử lý lưu hình ảnh nếu có được tải lên
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName); // Lưu hình ảnh vào thư mục public/images
+            $image->move(public_path('images'), $imageName);
             $news->image = 'images/'.$imageName;
         }
 
@@ -119,4 +115,20 @@ class TinTucController extends Controller
         return redirect()->route('tin-tuc.danh-sach')
             ->with('success', 'Tin tức đã được xóa thành công.');
     }
+    public function Search(Request $request)
+    {
+        if (Gate::denies('quan-ly-tin-tuc')) {
+            return redirect()->route('admin.index')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $query = $request->input('query');
+        $Page = $request->input('Page', 5); 
+
+        $news = TinTuc::where('tin_tuc.tieu_de', 'LIKE', "%$query%")
+        ->orWhere('tin_tuc.mo_ta_ngan', 'LIKE', "%$query%")
+        ->orWhere('tin_tuc.noi_dung', 'LIKE', "%$query%")
+        ->paginate($Page);
+
+
+        return view('admin/tin-tuc/danh-sach', compact('news','Page'));
+    } 
 }

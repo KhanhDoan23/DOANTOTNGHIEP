@@ -17,6 +17,20 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Địa Chỉ</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control  @error('dia_chi') @enderror " name="dia_chi" >    
+                                    @error('dia_chi')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control  @error('email') @enderror " name="email" >    
+                                    @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Tên Đăng Nhập </label>
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control  @error('ten_dang_nhap') @enderror " name="ten_dang_nhap" >     

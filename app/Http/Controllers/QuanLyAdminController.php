@@ -23,6 +23,8 @@ class QuanLyAdminController extends Controller
       
         $admin= new DangNhap();
         $admin->ten           = $request->ten;
+        $admin->dia_chi           = $request->dia_chi;
+        $admin->email           = $request->email;
         $admin->ten_dang_nhap = $request->ten_dang_nhap;
         $admin->password      = Hash::make($request->password);
         $admin->quyen_id      = $request->quyen;
@@ -63,19 +65,16 @@ class QuanLyAdminController extends Controller
 
     public function XuLyCapNhatAdmin(AdminRequest $request, $id)
     {
-        $admin = DangNhap::find($id);
+        $admin = DangNhap::findOrFail($id);
         if (empty($admin)) {
             return redirect()->route('danh-sach')->with('error','tài khoản không tồn tại');
         }
         $admin->ten     = $request->ten;
+        $admin->dia_chi           = $request->dia_chi;
+        $admin->email           = $request->email;
         $admin->ten_dang_nhap    = $request->ten_dang_nhap;
-        if($request->password != $admin->password ){
-            $admin->password     = Hash::make($request->password);
-        }
         $admin->quyen_id = $request->quyen;
         $admin->save();
-        
-
         return redirect()->route('danh-sach')->with('thong_bao','Cập Nhật Tài Khoản Thành Công');
      
     }

@@ -9,5 +9,12 @@ class SanBong extends Model
 {
     use HasFactory;
     protected $table="san_bong";
-    protected $fillable = ['ten_san', 'loai_san_id', 'hinh_anh'];
+    public function loai_san()
+    {
+        return $this->belongsTo(LoaiSan::class);
+    }
+    public function gia_thue()
+    {
+        return $this->belongsTo(GiaThue::class);
+    }
 }

@@ -14,7 +14,7 @@
 
         <h3>Tài Khoản Khách Hàng</h3>
         <form class="form-inline" method="get" action="{{ route('admin.quan-ly-user') }}">
-            <div class="form-group" style="max-width: 200px;">
+            <div class="form-group" style="max-width: 70px;">
                 <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
                 <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
                     <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>

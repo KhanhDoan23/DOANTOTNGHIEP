@@ -13,7 +13,7 @@ class ThemQuyenAdminSeeder extends Seeder
     public function run(): void
     {
         $quyen = new Quyen();
-        $quyen->ten_quyen = "Chủ";
+        $quyen->ten_quyen = "Admin";
         $quyen->save();
     }
 

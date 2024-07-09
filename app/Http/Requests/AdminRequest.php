@@ -24,8 +24,9 @@ class AdminRequest extends FormRequest
         return [
             
             'ten' => 'required',
+            'dia_chi' => 'required',
+            'email' => 'required|email',
             'ten_dang_nhap' => 'required|regex:/^[a-zA-Z0-9]+$/',
-            'password' => 'required|min:3',
             
         ];
     }
@@ -35,13 +36,11 @@ class AdminRequest extends FormRequest
         return [
            
             'ten.required' => 'vui lòng nhập tên quản lý',
+            'dia_chi.required' => 'vui lòng nhập email',
+            'email.required' => 'vui lòng nhập tên quản lý',
+            'email.email' => 'vui lòng nhập đúng định dạng email',
             'ten_dang_nhap.required' => 'vui lòng nhập tên đăng nhập',
-            'ten_dang_nhap.regex' => 'tên đăng nhập không được chứa ký tự đặc biệt',
-            'password.required' => 'vui lòng nhập mật khẩu',
-            'password.min' => 'mật khẩu từ :min ký tự trở lên', 
-            
-       
-        
+            'ten_dang_nhap.regex' => 'tên đăng nhập không được chứa ký tự đặc biệt',      
         ];
     }
 }

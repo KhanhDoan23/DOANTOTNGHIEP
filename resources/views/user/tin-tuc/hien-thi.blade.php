@@ -20,7 +20,7 @@
                         <p class="card-text">{{ $item->mo_ta_ngan }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{{ route('user.tin-tuc.chi-tiet',$item->id) }}" class="btn btn-sm btn-outline-secondary">Xem thêm</a>
+                            <a href="{{ route('user.tin-tuc.chi-tiet',$item->id) }}" class="me-2"><button type="button" class="px-5 py-3 btn btn-primary border-2 rounded-pill animated slideInDown">Xem Thêm</button></a>
                             </div>
                             <small class="text-muted">Ngày đăng: {{ $item->ngay_dang }}</small>
                         </div>
