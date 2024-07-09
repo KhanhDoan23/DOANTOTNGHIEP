@@ -68,18 +68,18 @@
                     <div class="collapse navbar-collapse me-n3" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="{{route('user.index')}}" class="nav-item nav-link active"><i class="fas fa-home"></i>Home</a>
-                            <a href="{{route('user.dat-san.hien-thi')}}" class="nav-item nav-link active"><i class="fas fa-calendar-alt"></i>                            Đặt Sân</a>
+                            <a href="{{route('user.dat-san.hien-thi')}}" class="nav-item nav-link active"><i class="fas fa-calendar-alt"></i>Đặt Sân</a>
                             <a href="{{route('lien-he-ho-tro')}}" class="nav-item nav-link active"><i class="fas fa-phone"></i>Liên hệ</a>
                             <a href="{{route('user.tin-tuc.hien-thi')}}" class="nav-item nav-link active"><i class="fas fa-newspaper"></i>Tin Tức</a>
                             @if(auth('cus')->check())
-                            <a href="{{route('lich-su-dat-san')}}" class="nav-item nav-link active"><i class="fas fa-shopping-cart"></i>Lịch Sử</a>
+                           
                                 <a class="nav-item nav-link active" href="{{route('user.profile')}}">
                                     <i class="fas fa-user"></i> Hi,{{auth('cus')->user()->ho_ten}}
                                 </a>
                                 <a class="nav-item nav-link active" href="{{route('user.dang-xuat')}}">
                                     <i class="fas fa-sign-in-alt"></i> Đăng xuất
                                 </a>
-                               
+                                <a href="{{route('lich-su-dat-san')}}" class="nav-item nav-link active"><i class="fas fa-shopping-cart"></i>Lịch Sử</a>
                             @else
                                 <a class="nav-item nav-link active" href="{{route('user.dang-nhap')}}">
                                     <i class="fas fa-user"></i> Đăng nhập

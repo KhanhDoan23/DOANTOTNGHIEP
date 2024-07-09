@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">  
   </head>
@@ -80,6 +81,12 @@
                 <a href="{{route('admin.danhsach')}}">
                   <i class="fas fa-table"></i>
                   <p>Quản lý đặt sân</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.thong-ke')}}">
+                  <i class="fas fa-table"></i>
+                  <p>Quản lý Thông Kê</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -181,11 +188,11 @@
           <div class="container-fluid d-flex justify-content-between">
             <div class="copyright">
               2024, made with <i class="fa fa-heart heart text-danger"></i> by
-              <a href="#">ThemeKita</a>
+              <a href="#">TuanKhanhCKC</a>
             </div>
             <div>
               Distributed by
-              <a target="_blank" href="#">ThemeWagon</a>.
+              <a target="_blank" href="#">TuanKhanhCKC</a>.
             </div>
           </div>
         </footer>
@@ -212,6 +219,7 @@
     <script src="{{ asset('assets/js/kaiadmin.min.js')}}"></script>
     <script src="{{ asset('assets/js/setting-demo.js')}}"></script>
     <script src="{{ asset('assets/js/demo.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
     @yield('page')
     @if (session('thong_bao'))
     <script>

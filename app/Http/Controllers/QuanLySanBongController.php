@@ -31,6 +31,8 @@ class QuanLySanBongController extends Controller
         $sanbong = new SanBong();
         $validatedData = $request->validate([
             'ten_san' => 'required',
+        ],[
+            'ten_san.required' => 'Tên sân không được để trống',
         ]);
         $existingSanBong = SanBong::where('ten_san', $request->ten_san)->first();
         if ($existingSanBong) {

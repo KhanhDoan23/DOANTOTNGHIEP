@@ -123,6 +123,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
     Route::get('/quan-ly-dat-san/search', [QuanLyDatSanController::class, 'Search'])->name('admin.quan-ly-dat-san.search');
     Route::get('/thanh-toan/danh-sach', [ThanhToanController::class, 'DanhSach'])->name('admin.thanh-toan-page');
     Route::get('/thanh-toan/search', [ThanhToanController::class, 'Search'])->name('admin.thanh-toan.search');
+    Route::get('/thong-ke/thong-ke', [ThanhToanController::class, 'ThongKeDoanhThu'])->name('admin.thong-ke');
 });
 
 
