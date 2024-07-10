@@ -41,7 +41,7 @@
                     <div class="form-group row">
                         <label for="password" class="col-md-4 col-form-label text-md-right">Nhập Password:</label>
                         <div class="col-md-6">
-                            <input id="password" type="text" class="form-control" name="password">
+                            <input id="password" type="password" class="form-control" name="password">
                             @error('password')
                                 <div class="help-block">{{$message}}</div>
                             @enderror

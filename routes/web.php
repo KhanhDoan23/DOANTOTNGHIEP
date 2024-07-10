@@ -96,8 +96,8 @@ Route::group(['prefix' => 'user'],function(){
     Route::get('/forgot-pass',[DangNhapUserController::class,'forgot_pass'])->name('user.forgot-pass');
     Route::post('/forgot-pass',[DangNhapUserController::class,'check_forgot_pass']);
 
-    Route::get('/reset-pass',[DangNhapUserController::class,'reset_pass'])->name('user.reset-pass');
-    Route::post('/reset-pass',[DangNhapUserController::class,'check_reset_pass']);
+    Route::get('/reset-pass/{token}',[DangNhapUserController::class,'reset_pass'])->name('user.reset-pass');
+    Route::post('/reset-pass/{token}',[DangNhapUserController::class,'check_reset_pass']);
 });
 Route::get('user/index',[DangNhapUserController::class,'giaodienuser'])->name('user.index');
 Route::get('/tin-tuc/hien-thi', [TinTucController::class, 'HienThi'])->name('user.tin-tuc.hien-thi');

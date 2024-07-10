@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPassword;
 use App\Mail\VerifyAccount;
 use App\Models\DangNhapUser;
+use App\Models\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Hash;
@@ -87,11 +89,25 @@ class DangNhapUserController extends Controller
     }
     public function forgot_pass()
     {
-        return view("user.forgot_pass");
+        return view("user.forgot-pass");
     }
-    public function check_forgot_pass()
+    public function check_forgot_pass(Request $request)
     {
-    
+        $request->validate([
+            'email' => 'required|exists:user'
+        ]);
+        $cus =DangNhapUser::where('email',$request->email)->first();
+        $token=\Str::random(50);
+        $tokenData =[
+            'email' => $request->email,
+            'token' => $token
+        ];
+        if(ResetPassword::create($tokenData)){
+            Mail::to($request->email)->send(new ForgotPassword($cus,$token));
+            return redirect()->route('user.dang-nhap')->with('thong_bao','Gửi mail thành công vui lòng check');
+        }
+        return redirect()->back()->with('error', 'Bạn chưa xác nhận email');
+        //$data = $request->only('email', 'password');
     }
     public function profile()
     {
@@ -118,19 +134,33 @@ class DangNhapUserController extends Controller
         ]);
         $data = $request->only('ho_ten', 'email', 'so_dien_thoai');
 
-       $check=$auth->update($data);
+        $check=$auth->update($data);
         if($check){
             return redirect()->back()->with('thong_bao','Cập nhật thành công');
         }
         return redirect()->back()->with('error','Có lỗi vui lòng kiểm tra lại');
         
     }
-    public function reset_pass()
+    public function reset_pass($token)
     {
-        return view("user.reset_pass");
+        $tokenData=ResetPassword::checkToken($token);
+        return view("user.reset-pass");
     }
-    public function check_reset_pass()
+    public function check_reset_pass($token)
     {
-    
+        request()->validate([
+            'password' =>'required|min:4',
+            'confirm_password'=>'required|same:password',
+        ]);
+        $tokenData=ResetPassword::CheckToken($token);
+        $cus=  $tokenData->customer();
+        $data=[
+            'password'=>bcrypt(request(('password'))),
+        ];
+        $check=$cus->update($data);
+        if($check){
+            return redirect()->route('user.dang-nhap')->with('thong_bao','Cập nhật mật khẩu thành công');
+        }
+        return redirect()->back()->with('error','Có lỗi vui lòng kiểm tra lại');
     }
 }
