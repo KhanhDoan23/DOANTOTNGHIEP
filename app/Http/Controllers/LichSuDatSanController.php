@@ -25,6 +25,8 @@ class LichSuDatSanController extends Controller
         if ($datSan->trang_thai_dat_san_id == 3) {
             return redirect()->route('lich-su-dat-san')->with('error', 'Lịch Đặt Sân đã được huỷ trước đó.');
         }
+        $datSan->tg_bat_dau = null; 
+        $datSan->tg_ket_thuc = null; 
         $datSan->trang_thai_dat_san_id = 3;
         $datSan->save();
 
@@ -35,6 +37,8 @@ class LichSuDatSanController extends Controller
 
     
         foreach ($lichDatSan as $lich) {
+            $lich->tg_bat_dau = null; 
+            $lich->tg_ket_thuc = null; 
             $lich->trang_thai_dat_san_id = 3; 
             $lich->save();
         }

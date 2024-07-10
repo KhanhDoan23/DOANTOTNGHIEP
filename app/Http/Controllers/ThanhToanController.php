@@ -36,11 +36,6 @@ class ThanhToanController extends Controller
                 $datSan->trang_thai_dat_san_id = 2;
                 $datSan->save();
             }
-             if (!empty($datSan))
-            {
-                $datSan->trang_thai_dat_san_id = 1;
-                $datSan->save();
-            }
         }
 
         $thanhToan->save();

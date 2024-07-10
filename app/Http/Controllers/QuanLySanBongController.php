@@ -30,14 +30,11 @@ class QuanLySanBongController extends Controller
     {
         $sanbong = new SanBong();
         $validatedData = $request->validate([
-            'ten_san' => 'required',
+            'ten_san' => 'required|unique:san_bong,ten_san',
         ],[
             'ten_san.required' => 'Tên sân không được để trống',
+            'ten_san.unique' => 'Tên sân đã tồn tại',
         ]);
-        $existingSanBong = SanBong::where('ten_san', $request->ten_san)->first();
-        if ($existingSanBong) {
-            return view('admin/quan-ly-san-bong/them-moi')->with('error', 'Tên sân đã tồn tại');
-        }
         $sanbong = new SanBong();
         $sanbong->ten_san=$request->ten_san;
         $sanbong->dia_chi=$request->dia_chi;

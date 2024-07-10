@@ -17,14 +17,35 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Nội dung về tin tức</h5>
                     <ul class="list-unstyled">
-                        <h1><li>{{ $news->tieu_de }}</li></h1>
+                        <li>{{ $news->tieu_de }}</li>
                         <p>{{ $news->mo_ta_ngan }}</p>
+                        <p class="card-text">{{ $news->noi_dung }}</p>
                         <li><strong>Ngày đăng:</strong> {{ $news->ngay_dang }}</li>
                     </ul>
+                </div>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Các tin tức khác</h5>
+                    <div class="row">
+                        @foreach ($randomNews as $random)
+                        <div class="col-md-6 mb-4">
+                            <div class="card">
+                                @if ($random->image)
+                                <a href="{{ route('user.tin-tuc.chi-tiet', $random->id) }}"><img src="{{ asset($random->image) }}" class="card-img-top" alt="Hình ảnh tin tức"></a>
+                                @endif
+                                <div class="card-body">
+                                    <h6 class="card-title"><a href="{{ route('user.tin-tuc.chi-tiet', $random->id) }}">{{ $random->tieu_de }}</a></h6>
+                                    <p class="card-text">{{ $random->mo_ta_ngan }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

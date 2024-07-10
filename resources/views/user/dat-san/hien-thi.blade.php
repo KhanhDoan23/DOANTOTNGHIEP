@@ -13,6 +13,8 @@
                         <h5 class="card-title">{{ $sanBong->ten_san }} - {{ $sanBong->loai_san->loai_san }}</h5>
                         <p class="card-text">Địa chỉ: {{ $sanBong->dia_chi }}</p>
                         <p class="card-text">Giá thuê: {{number_format($sanBong->gia_thue->gia_30p)}}VNĐ / 30 phút</p>
+                        <p class="card-text" >Giá thuê: {{number_format($sanBong->gia_thue->gia_1h)}}VNĐ / 60 phút</p>
+                        <p class="card-text" style="color:red">Phụ Thu sau 6h (nếu có): {{number_format($sanBong->gia_thue->phu_thu_toi)}}VNĐ</p>
                         <a href="{{ route('dat-san.show', ['id' => $sanBong->id]) }}" class="btn btn-primary">Đặt sân</a>
                     </div>
                 </div>

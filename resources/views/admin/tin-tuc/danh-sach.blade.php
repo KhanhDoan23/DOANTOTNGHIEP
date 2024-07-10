@@ -18,6 +18,18 @@
                 <div class="pull-left">
                     <h2>Danh sách tin tức</h2>
                 </div>
+                <form class="form-inline" method="get" action="{{ route('tin-tuc.danh-sach') }}">
+                    <div class="form-group" style="max-width: 70px; text-align:center;">
+                        <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng hiển thị trang:</label>
+                        <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
+                            <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
+                            <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
+                            <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
+                            <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </div>
+                </form>
                 <div class="pull-right">
                     <a class="btn btn-success" href="{{ route('tin-tuc.them-moi') }}"> Tạo tin tức mới</a>
                 </div>

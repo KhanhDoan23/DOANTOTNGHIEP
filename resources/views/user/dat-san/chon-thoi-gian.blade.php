@@ -21,27 +21,6 @@
                         <label for="thoi_gian_ket_thuc">Thời gian kết thúc</label>
                         <input type="datetime-local" id="thoi_gian_ket_thuc" name="tg_ket_thuc" class="form-control" step="1800" required>
                     </div>
-                    @if(auth('cus')->check())
-                        <h5>Thời gian đã đặt</h5>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Thời gian bắt đầu</th>
-                                        <th>Thời gian kết thúc</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($lichDatSan as $lich)
-                                    <tr>
-                                        <td>{{ $lich->tg_bat_dau }}</td>
-                                        <td>{{ $lich->tg_ket_thuc }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        @endif
                         <h5>Thời gian còn trống</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered">

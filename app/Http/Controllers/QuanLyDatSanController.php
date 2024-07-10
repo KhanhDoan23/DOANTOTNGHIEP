@@ -13,7 +13,7 @@ class QuanLyDatSanController extends Controller
     public function DanhSach(Request $request)
     {
         $Page = $request->input('Page', 5);
-        $dsDatSan = QuanLyDatSan::paginate($Page);
+        $dsDatSan = QuanLyDatSan::orderBy('ngay_dat', 'desc')->paginate($Page);
     
         foreach ($dsDatSan as $datSan) {
             $giaThue = GiaThue::findOrFail($datSan->gia_thue_id);
@@ -34,6 +34,10 @@ class QuanLyDatSanController extends Controller
     }
     public function ChonThoiGian($id)
     {
+        if (!auth('cus')->check()) {
+            return redirect()->back()->with('error', 'Vui lòng đăng nhập để tiếp tục.');
+        }
+
         $dsSanBong = SanBong::findOrFail($id);
         $datSan=QuanLyDatSan::where('user_id', auth('cus')->user()->id)->get();
         $lichDatSan = QuanLyDatSan::where('san_bong_id', $id)->get();
@@ -122,6 +126,13 @@ public function store(Request $request, $id)
         $datSan->tong_tien = $tongTien;
         $datSan->trang_thai_dat_san_id = 1;
         $datSan->save();
+        $thanhToan = new ThanhToan();
+        $thanhToan->dat_san_id = $datSan->id;
+        $thanhToan->gia_thue_id = $gia_thue_id;
+        $thanhToan->ngay_thanh_toan = null;
+        $thanhToan->trang_thai_thanh_toan_id = 2;
+        $thanhToan->save();
+
         return redirect()->route('user.dat-san.hien-thi')->with('thong_bao', 'Đặt sân thành công');
     }
     private function tinhTongTien($tg_bat_dau, $tg_ket_thuc, $gia_thue)
@@ -146,9 +157,16 @@ public function store(Request $request, $id)
         if ($soPhut >= 60) {
             $soGio = floor($soPhut / 60);
             $soPhutConLai = $soPhut % 60;
+            if ($soPhutConLai > 30) {
+                $soGio += 1; 
+                $soPhutConLai = 0;
+            } elseif ($soPhutConLai > 0 && $soPhutConLai <= 30) {
+                $soPhutConLai = 1;
+            }
+    
             $tongTien = $soGio * $gia1h + $soPhutConLai * $gia30p + $phuThu;
         } else {
-            $tongTien = $soPhut * $gia30p + $phuThu;
+            $tongTien = $gia30p + $phuThu;
         }
     
         return $tongTien;
@@ -187,6 +205,8 @@ public function store(Request $request, $id)
         $dsDatSan = QuanLyDatSan::where('dat_san.tong_tien', 'LIKE', "%$query%")
         ->leftJoin('user', 'dat_san.user_id', '=', 'user.id')
         ->orWhere('user.ho_ten', 'LIKE', "%$query%")
+        ->leftJoin('san_bong', 'dat_san.san_bong_id', '=', 'san_bong.id')
+        ->orWhere('san_bong.ten_san', 'LIKE', "%$query%")
         ->paginate($Page);
 
 

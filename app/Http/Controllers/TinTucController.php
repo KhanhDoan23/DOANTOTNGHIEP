@@ -10,6 +10,7 @@ class TinTucController extends Controller
 {
     public function HienThi()
     {
+        
         $news = TinTuc::all(); 
 
         return view('user/tin-tuc/hien-thi', compact('news'));
@@ -17,12 +18,17 @@ class TinTucController extends Controller
     public function ChiTietHienThi($id)
     {
         $news = TinTuc::findOrFail($id);
-        return view('user/tin-tuc/chi-tiet', compact('news'));
+        $randomNews = TinTuc::where('id', '!=', $news->id)
+                      ->inRandomOrder()
+                      ->take(5)
+                      ->get();
+        return view('user/tin-tuc/chi-tiet', compact('news','randomNews'));
     }
-    public function DanhSach()
+    public function DanhSach(Request $request)
     {
+        $Page = $request->input('Page', 5 );
         $news = TinTuc::latest()->paginate(10);
-        return view('admin/tin-tuc/danh-sach', compact('news'));
+        return view('admin/tin-tuc/danh-sach', compact('news','Page'));
     }
 
     public function ThemMoi()

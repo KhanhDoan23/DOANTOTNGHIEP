@@ -2,9 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h2 class="my-4">Lịch sử đặt sân</h2>
+    <h2 class="my-4" style="text-align:center;">Lịch sử đặt sân</h2>
     <div class="card">
         <div class="card-body">
+            @if ($lichSuDatSan->isEmpty())
+                <div class="empty-message">
+                    <p>Chưa có đặt lần nào.</p>
+                </div>
+            @else
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -55,7 +60,21 @@
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
     </div>
 </div>
+<style>
+    .empty-message {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    font-size: 1.2rem; 
+    color:black; 
+}
+
+</style>
 @endsection
