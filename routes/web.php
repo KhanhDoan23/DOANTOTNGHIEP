@@ -124,6 +124,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
     Route::get('/thanh-toan/danh-sach', [ThanhToanController::class, 'DanhSach'])->name('admin.thanh-toan-page');
     Route::get('/thanh-toan/search', [ThanhToanController::class, 'Search'])->name('admin.thanh-toan.search');
     Route::get('/thong-ke/thong-ke', [ThanhToanController::class, 'ThongKeDoanhThu'])->name('admin.thong-ke');
+    Route::get('/thong-ke/thong-ke-san', [QuanLyDatSanController::class,'thongKeSan'])->name('admin.thong-ke-san');
+
 });
 
 
@@ -137,6 +139,7 @@ Route::get('user/lich-su-dat/lich-su', [LichSuDatSanController::class, 'DanhSach
 Route::put('user/lich-su-dat/huy/{id}', [LichSuDatSanController::class, 'huyDatSan'])->name('user.huy-dat-san');
 
 Route::get('user/lien-he/lien-he', [LienHeController::class, 'ChamSocKhachHang'])->name('lien-he-ho-tro');
+
 
 
 

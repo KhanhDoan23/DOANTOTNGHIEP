@@ -21,4 +21,12 @@ class ThanhToan extends Model
     {
         return $this->belongsTo(TrangThaiThanhToan::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(KhachHang::class);
+    }
+    public function san_bong()
+    {
+        return $this->belongsTo(SanBong::class);
+    }
 }

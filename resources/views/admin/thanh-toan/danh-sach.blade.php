@@ -13,18 +13,20 @@
             </div>
         </form>
         <h3>Danh Sách Hoá Đơn</h3>
-        <form class="form-inline" method="get" action="{{ route('admin.thanh-toan-page') }}">
-            <div class="form-group" style="max-width: 70px; text-align:center;">
-                <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
-                <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
-                    <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
-                    <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
-                    <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
-                    <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
-                    <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+        <form class="form-inline mb-3" action="{{ route('admin.thanh-toan-page') }}" method="GET">
+            <div class="form-group">
+            <i class="fas fa-filter"></i><label for="trangthai" class="mr-2">Lọc theo trạng thái:</label>
+                <select class="form-control" name="trangthai" id="trangthai" onchange="this.form.submit()"
+                        style="font-size: 14px; max-width: 150px;">
+                    <option value="">Tất cả</option>
+                    <option value="1" {{ request('trangthai') == '1' ? 'selected' : '' }}>Đã thanh toán</option>
+                    <option value="2" {{ request('trangthai') == '2' ? 'selected' : '' }}>Chưa thanh toán</option>
+                    <option value="3" {{ request('trangthai') == '3' ? 'selected' : '' }}>Chờ duyệt</option>
                 </select>
             </div>
         </form>
+
+
             <thead>
                 <tr>
                     <th>Tên Khách Hàng</th>
@@ -54,6 +56,8 @@
                             @endif
                         </td>
                         <td>
+                    @if ($datSan->trang_thai_dat_san_id !== 4)
+                        @if ($datSan->trang_thai_dat_san_id !== 3)
                             @if ($datSan->trang_thai_thanh_toan_id !== 1)
                                 <form method="post" action="{{ route('admin.thay-doi-trang-thai-thanh-toan', ['id' => $datSan->thanhToan->id]) }}">
                                     @csrf
@@ -67,6 +71,8 @@
                             @else
                                 <label><span class="badge bg-success">Đã Thanh Toán</span></label>
                             @endif
+                        @endif
+                    @endif
                         </td>
                     </tr>
                 @endforeach

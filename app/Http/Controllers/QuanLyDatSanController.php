@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\KhachHang;
 use Illuminate\Support\Facades\Auth;
 use App\Models\QuanLyDatSan;
 use App\Models\ThanhToan;
@@ -12,9 +13,13 @@ class QuanLyDatSanController extends Controller
 {
     public function DanhSach(Request $request)
     {
-        $Page = $request->input('Page', 5);
-        $dsDatSan = QuanLyDatSan::orderBy('ngay_dat', 'desc')->paginate($Page);
-    
+        $Page = $request->input('Page', 10);
+        $trangThai = $request->input('trangthai');
+        $query = QuanLyDatSan::orderBy('ngay_dat', 'desc');
+        if ($trangThai) {
+            $query->where('trang_thai_dat_san_id', $trangThai);
+        }
+        $dsDatSan = $query->paginate($Page);
         foreach ($dsDatSan as $datSan) {
             $giaThue = GiaThue::findOrFail($datSan->gia_thue_id);
             $tg_bat_dau = $datSan->tg_bat_dau;
@@ -23,9 +28,10 @@ class QuanLyDatSanController extends Controller
             $datSan->tong_tien = $tongTien;
             $datSan->save();
         }
-    
-        return view('admin.quan-ly-dat-san.danh-sach', compact('dsDatSan', 'Page'));
+
+        return view('admin.quan-ly-dat-san.danh-sach', compact('dsDatSan', 'Page','trangThai'));
     }
+
     
     public function HienThi()
     {
@@ -124,7 +130,8 @@ public function store(Request $request, $id)
         $datSan->tg_bat_dau = $request->tg_bat_dau;
         $datSan->tg_ket_thuc = $request->tg_ket_thuc;
         $datSan->tong_tien = $tongTien;
-        $datSan->trang_thai_dat_san_id = 1;
+        $datSan->trang_thai_thanh_toan_id = 2;
+        $datSan->trang_thai_dat_san_id = 4;
         $datSan->save();
         $thanhToan = new ThanhToan();
         $thanhToan->dat_san_id = $datSan->id;
@@ -165,8 +172,11 @@ public function store(Request $request, $id)
             }
     
             $tongTien = $soGio * $gia1h + $soPhutConLai * $gia30p + $phuThu;
-        } else {
+        } elseif($soPhut < 60 && $soPhut >=1) {
             $tongTien = $gia30p + $phuThu;
+        }
+        else{
+            $tongTien=0; 
         }
     
         return $tongTien;
@@ -181,7 +191,6 @@ public function store(Request $request, $id)
         $trangthai = $request->trangthai;
 
         $datSan = QuanLyDatSan::find($id);
-
         if (empty($datSan)) {
             return redirect()->route('admin.danhsach')->with('error', 'Lịch Đặt Sân Không Tồn Tại');
         }
@@ -190,6 +199,11 @@ public function store(Request $request, $id)
         if ($trangthai == 1) { 
             $datSan->ngay_dat = now();
         }
+        if( $trangthai==3)
+        {
+            $datSan->trang_thai_thanh_toan_id = 2;
+        }
+        
         $datSan->save();
 
         return redirect()->route('admin.danhsach')->with('thong_bao', 'Thay Đổi Trạng Thái Thành Công');
@@ -200,7 +214,8 @@ public function store(Request $request, $id)
             return redirect()->route('admin.index')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
-        $Page = $request->input('Page', 5); 
+        $Page = $request->input('Page', 10); 
+        $trangThai = $request->input('trangthai');
 
         $dsDatSan = QuanLyDatSan::where('dat_san.tong_tien', 'LIKE', "%$query%")
         ->leftJoin('user', 'dat_san.user_id', '=', 'user.id')
@@ -210,6 +225,20 @@ public function store(Request $request, $id)
         ->paginate($Page);
 
 
-        return view('admin.quan-ly-dat-san.danh-sach', compact('dsDatSan','Page'));
+        return view('admin.quan-ly-dat-san.danh-sach', compact('dsDatSan','Page','trangThai'));
     } 
+    public function thongKeSan()
+    {
+        if (Gate::denies('quan-ly-thanh-toan')) {
+            return redirect()->route('admin.index')->with('error','bạn không có quyền truy cập vào chức năng này');
+        }
+        $sanDaDat = QuanLyDatSan::where('trang_thai_dat_san_id', '<>', 3)->count();
+        $sanDaHuy = QuanLyDatSan::where('trang_thai_dat_san_id', 3)->count();
+        $nguoiDatSan = QuanLyDatSan::selectRaw('count(distinct user_id) as count')->first()->count;
+        $userDangKy = KhachHang::all()->count();
+        
+
+        return view('admin/thong-ke/thong-ke-san', compact('sanDaDat','nguoiDatSan','sanDaHuy','userDangKy'));
+    }
+
 }

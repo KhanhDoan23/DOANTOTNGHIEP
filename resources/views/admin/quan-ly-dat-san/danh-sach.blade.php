@@ -12,15 +12,16 @@
             </div>
         </form>
             <h3>Quản lý đặt sân</h3>
-            <form class="form-inline" method="get" action="{{route('admin.danhsach')}}">
-                <div class="form-group" style="max-width: 70px; text-align:center;">
-                    <label for="Page" style="color :red;font-size: 13px;">Số lượng dòng trên mỗi trang:</label>
-                    <select class="form-control" name="Page" id="Page" onchange="this.form.submit()">
-                        <option value="5" {{ $Page == 5 ? 'selected' : '' }}>5</option>
-                        <option value="10" {{ $Page == 10 ? 'selected' : '' }}>10</option>
-                        <option value="20" {{ $Page == 20 ? 'selected' : '' }}>20</option>
-                        <option value="50" {{ $Page == 50 ? 'selected' : '' }}>50</option>
-                        <option value="100" {{ $Page == 100 ? 'selected' : '' }}>100</option>
+            <form class="form-inline mb-3" action="{{ route('admin.danhsach') }}" method="GET">
+                <div class="form-group">
+                <i class="fas fa-filter"></i><label for="trangthai" class="mr-2">Lọc theo trạng thái:</label>
+                    <select class="form-control" name="trangthai" id="trangthai" onchange="this.form.submit()"
+                            style="font-size: 14px; max-width: 150px;">
+                        <option value="">Tất cả</option>
+                        <option value="1" {{ $trangThai == '1' ? 'selected' : '' }}>Đã xác nhận</option>
+                        <option value="2" {{ $trangThai == '2' ? 'selected' : '' }}>Đã hoàn thành</option>
+                        <option value="3" {{ $trangThai == '3' ? 'selected' : '' }}>Đã hủy</option>
+                        <option value="4" {{ $trangThai == '4' ? 'selected' : '' }}>Chờ duyệt</option>
                     </select>
                 </div>
             </form>
@@ -33,7 +34,8 @@
                     <th>Thời Gian Bắt Đầu</th>
                     <th>Thời Gian Kết Thúc</th>
                     <th>Tổng Tiền</th>
-                    <th>Trạng Thái</th>
+                    <th>Trạng Thái Thanh Toán</th>
+                    <th>Trạng Thái Đặt Sân</th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,6 +48,7 @@
                     <td>{{ $datSan->tg_bat_dau }}</td>
                     <td>{{ $datSan->tg_ket_thuc }}</td>
                     <td>{{ number_format($datSan->tong_tien) }}</td>
+                    <td>{{ $datSan->trang_thai_thanh_toan->trang_thai }}</td>
                     <td>
                         @if($datSan->trang_thai_dat_san_id == 1)
                         <span class="badge bg-info">Đã Xác Nhận</span>
@@ -58,7 +61,7 @@
                         @endif
                     </td>
                     <td>
-                        @if($datSan->trang_thai_dat_san->trang_thai !== 3 && $datSan->trang_thai_dat_san->trang_thai !== 2)
+                        @if($datSan->trang_thai_dat_san->trang_thai !== 3 && $datSan->trang_thai_dat_san->trang_thai !== 4)
                         <form method="post" action="{{ route('admin.thay-doi-trang-thai', ['id' => $datSan->id]) }}">
                             @csrf
                             @method('put')
@@ -67,6 +70,7 @@
                                 <option value="1">Xác Nhận</option>
                                 <option value="2">Đã Hoàn Thành</option>
                                 <option value="3">Đã Hủy</option>
+                                <option value="4">Chờ duyệt</option>
                             </select>
                         </form>
                         @else

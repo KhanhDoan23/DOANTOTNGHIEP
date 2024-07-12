@@ -84,10 +84,25 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('admin.thong-ke')}}">
-                  <i class="fas fa-table"></i>
+                <a data-bs-toggle="collapse" href="#base">
+                <i class="fas fa-table"></i>
                   <p>Quản lý Thông Kê</p>
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="base">
+                  <ul class="nav nav-collapse">
+                    <li>
+                        <a href="{{route('admin.thong-ke')}}">
+                        <span class="sub-item">Thống Kê Doanh Thu</span>
+                      </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.thong-ke-san')}}">
+                        <span class="sub-item">Thống Kê Số Lượng</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="nav-item">
                 <a href="{{route('admin.thanh-toan-page')}}">

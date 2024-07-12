@@ -65,6 +65,7 @@ class DatSanController extends Controller
         $query = $request->input('query');
 
         $dsSanBong = SanBong::where('san_bong.ten_san', 'LIKE', "%$query%")
+        ->orWhere('san_bong.dia_chi', 'LIKE', "%$query%")
         ->get();
 
 

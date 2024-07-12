@@ -16,8 +16,10 @@ class ThemAdminSeeder extends Seeder
         $admin = new DangNhap();
         $admin->ten           = "Đoàn Tuấn Khanh";
         $admin->ten_dang_nhap = "TuanKhanh34";
+        $admin->dia_chi = "188 Võ Thị Tần";
+        $admin->email = "Khanh179c@gmail";
         $admin->password      = Hash::make('abcxyz');
-        $admin->quyen_id      = 1;
+        $admin->quyen_id      = 4;
         $admin->save();
     }
 }

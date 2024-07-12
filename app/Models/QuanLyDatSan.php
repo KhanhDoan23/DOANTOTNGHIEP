@@ -32,4 +32,8 @@ class QuanLyDatSan extends Model
     {
         return $this->hasOne(ThanhToan::class, 'dat_san_id', 'id');
     }
+    public function trang_thai_thanh_toan()
+    {
+        return $this->belongsTo(TrangThaiThanhToan::class);
+    }
 }

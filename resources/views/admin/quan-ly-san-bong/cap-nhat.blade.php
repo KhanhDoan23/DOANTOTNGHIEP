@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <strong>Hình ảnh hiện tại:</strong><br>
                                     @if($sanbong->hinh_anh)
-                                        <img src="{{ asset($sanbong->hinh_anh) }}" alt="Hình ảnh sân" style="max-width: 100%;">
+                                        <img src="{{ asset($sanbong->hinh_anh) }}" alt="Hình ảnh sân" style="width:300px;height:300px">
                                     @else
                                         <p>Không có hình ảnh</p>
                                     @endif

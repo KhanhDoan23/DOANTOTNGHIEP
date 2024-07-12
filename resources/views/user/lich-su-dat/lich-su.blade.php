@@ -47,13 +47,14 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($datSan->trang_thai_dat_san_id == 1) 
-                                <form method="post" action="{{ route('user.huy-dat-san', ['id' => $datSan->id]) }}">
+                            @if ($datSan->trang_thai_dat_san_id == 4) 
+                                <form id="cancel-form-{{ $datSan->id }}" method="post" action="{{ route('user.huy-dat-san', ['id' => $datSan->id]) }}">
                                     @csrf
                                     @method('put')
-                                    <button type="submit" class="btn btn-danger btn-sm">Huỷ</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmCancel({{ $datSan->id }})">Huỷ</button>
                                 </form>
-                                @endif
+                            @endif
+
                             </td>
                         </tr>
                         @endforeach
@@ -77,4 +78,14 @@
 }
 
 </style>
+<script>
+    function confirmCancel(id) {
+        if (confirm('Bạn có chắc chắn muốn huỷ lịch đặt sân này không nếu huỷ thời gian đặt sẽ bị xoá?')) {
+            document.getElementById('cancel-form-' + id).submit();
+        } else {
+            return false;
+        }
+    }
+</script>
+
 @endsection

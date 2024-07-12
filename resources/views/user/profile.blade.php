@@ -48,7 +48,9 @@
                         </div>
                     </div>
                     <div class="form-group row mb-0">
+                        
                         <div class="col-md-6 offset-md-4">
+                        <a style="display: block; margin-top: 15px; margin-bottom: 15px;" href="{{route('user.forgot-pass')}}">Quên mật khẩu.</a>
                            <button type="submit" class="btn btn-primary" >Cập nhật thông tin</button>
                         </div>
                     </div>

@@ -64,7 +64,10 @@ class QuanLySanBongController extends Controller
     {
         $sanbong=SanBong::findOrFail($id);
         $validatedData = $request->validate([
-            'ten_san' => 'required',
+            'ten_san' => 'required|unique:san_bong,ten_san',
+        ],[
+            'ten_san.required' => 'Tên sân không được để trống',
+            'ten_san.unique' => 'Tên sân đã tồn tại',
         ]);   
         $sanbong->ten_san=$request->ten_san;
         $sanbong->dia_chi=$request->dia_chi;

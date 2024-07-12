@@ -11,11 +11,38 @@ class ThanhToanController extends Controller
 {
     public function DanhSach(Request $request)
     {
-        $Page = $request->input('Page', 5);
-        $cacLanThanhToan = ThanhToan::paginate($Page);
-        $dsDatSan = QuanLyDatSan::with('thanhToan')->get();
+    $Page = $request->input('Page', 10);
+    $trangThaiThanhToan = $request->input('trangthai');
+    $query = ThanhToan::query();
+    if ($trangThaiThanhToan) {
+        if ($trangThaiThanhToan == '1') {
+            $query->where('trang_thai_thanh_toan_id', 1);
+        } elseif ($trangThaiThanhToan == '2') {
+            $query->where('trang_thai_thanh_toan_id', 2);
+        } elseif ($trangThaiThanhToan == '3') {
+            $query->where('trang_thai_thanh_toan_id', '!=', 1)
+                  ->where('trang_thai_thanh_toan_id', '!=', 2);
+        }
+        }
+        $cacLanThanhToan = $query->paginate($Page);
+        $dsDatSan = QuanLyDatSan::with('thanhToan');
+        if ($trangThaiThanhToan) {
+            $dsDatSan->whereHas('thanhToan', function ($query) use ($trangThaiThanhToan) {
+                if ($trangThaiThanhToan == '1') {
+                    $query->where('trang_thai_thanh_toan_id', 1);
+                } elseif ($trangThaiThanhToan == '2') {
+                    $query->where('trang_thai_thanh_toan_id', 2);
+                } elseif ($trangThaiThanhToan == '3') {
+                    $query->where('trang_thai_thanh_toan_id', '!=', 1)
+                        ->where('trang_thai_thanh_toan_id', '!=', 2);
+                }
+            });
+        }
+        $dsDatSan = $dsDatSan->get();
+
         return view('admin.thanh-toan.danh-sach', compact('cacLanThanhToan', 'dsDatSan', 'Page'));
     }
+
     public function ThayDoiThanhToan(Request $request, $id)
     {
         if (Gate::denies('quan-ly-thanh-toan')) {
@@ -34,10 +61,10 @@ class ThanhToanController extends Controller
             $datSan = QuanLyDatSan::find($thanhToan->dat_san_id);
             if (!empty($datSan)) {
                 $datSan->trang_thai_dat_san_id = 2;
+                $datSan->trang_thai_thanh_toan_id = 1;
                 $datSan->save();
             }
         }
-
         $thanhToan->save();
 
         return redirect()->route('admin.thanh-toan-page')->with('thong_bao', 'Thay Đổi Trạng Thái Thành Công');
@@ -48,8 +75,7 @@ class ThanhToanController extends Controller
             return redirect()->route('admin.index')->with('error','bạn không có quyền truy cập vào chức năng này');
         }
         $query = $request->input('query');
-        $Page = $request->input('Page', 5); 
-
+        $Page = $request->input('Page', 10); 
         $cacLanThanhToan = ThanhToan::where('thanh_toan.ngay_thanh_toan', 'LIKE', "%$query%")
         ->leftJoin('dat_san', 'thanh_toan.dat_san_id', '=', 'dat_san.id')
         ->leftJoin('user', 'dat_san.user_id', '=', 'user.id')
@@ -60,8 +86,7 @@ class ThanhToanController extends Controller
         ->leftJoin('user', 'dat_san.user_id', '=', 'user.id')
         ->orWhere('user.ho_ten', 'LIKE', "%$query%")
         ->paginate($Page);
-
-
+       
         return view('admin.thanh-toan.danh-sach', compact('cacLanThanhToan','Page','dsDatSan'));
     } 
     public function ThongKeDoanhThu()
@@ -70,7 +95,7 @@ class ThanhToanController extends Controller
             return redirect()->route('admin.index')->with('error','Bạn không có quyền truy cập vào chức năng này');
         }
 
-        $doanhThuTheoThang = ThanhToan::where('trang_thai_thanh_toan_id', 1)
+        $doanhThuTheoThang = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
                                 ->join('dat_san', 'thanh_toan.dat_san_id', '=', 'dat_san.id')
                                 ->selectRaw('YEAR(ngay_thanh_toan) AS nam, MONTH(ngay_thanh_toan) AS thang, SUM(dat_san.tong_tien) AS tong_doanh_thu')
                                 ->groupBy('nam', 'thang')
@@ -78,7 +103,7 @@ class ThanhToanController extends Controller
                                 ->orderBy('thang', 'desc')
                                 ->get();
 
-        $doanhThuTheoNgay = ThanhToan::where('trang_thai_thanh_toan_id', 1)
+        $doanhThuTheoNgay = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
                                 ->join('dat_san', 'thanh_toan.dat_san_id', '=', 'dat_san.id')
                                 ->selectRaw('DATE(ngay_thanh_toan) AS ngay,SUM(dat_san.tong_tien) AS tong_doanh_thu')
                                 ->groupBy('ngay')
