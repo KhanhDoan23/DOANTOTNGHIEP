@@ -32,9 +32,27 @@
                             <td>{{ $datSan->san_bong->ten_san }}</td>
                             <td>{{ $datSan->san_bong->loai_san->loai_san }}</td>
                             <td>{{ $datSan->ngay_dat }}</td>
-                            <td>{{ $datSan->tg_bat_dau }}</td>
-                            <td>{{ $datSan->tg_ket_thuc }}</td>
-                            <td>{{ number_format($datSan->tong_tien) }} VNĐ</td>
+                            <td>
+                                @if ($datSan->tg_bat_dau)
+                                    {{ $datSan->tg_bat_dau }}
+                                @else
+                                    {{ $datSan->lichSuDatSan->tg_bat_dau_cu }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($datSan->tg_ket_thuc)
+                                    {{ $datSan->tg_ket_thuc }}
+                                @else
+                                    {{ $datSan->lichSuDatSan->tg_ket_thuc_cu }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($datSan->tong_tien)
+                                    {{ number_format($datSan->tong_tien) }} VNĐ
+                                @else
+                                    {{ number_format($datSan->lichSuDatSan->tong_tien_cu) }} VNĐ
+                                @endif
+                            </td>
                             <td>
                                 @if ($datSan->trang_thai_dat_san_id == 1)
                                 <span class="badge bg-warning text-dark">Đã Xác Nhận</span>

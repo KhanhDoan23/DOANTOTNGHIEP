@@ -45,7 +45,7 @@ class TinTucController extends Controller
             'tieu_de' => 'required',
             'mo_ta_ngan' => 'required',
             'noi_dung' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh có đúng định dạng và kích thước
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
         $news = new TinTuc();

@@ -36,4 +36,8 @@ class QuanLyDatSan extends Model
     {
         return $this->belongsTo(TrangThaiThanhToan::class);
     }
+    public function lichSuDatSan()
+    {
+        return $this->hasOne(LichSu::class, 'dat_san_id');
+    }
 }

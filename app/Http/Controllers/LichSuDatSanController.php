@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LichSu;
 use Illuminate\Http\Request;
 use App\Models\QuanLyDatSan;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,15 @@ class LichSuDatSanController extends Controller
         }
         if ($datSan->trang_thai_dat_san_id == 3) {
             return redirect()->route('lich-su-dat-san')->with('error', 'Lịch Đặt Sân đã được huỷ trước đó.');
-        }
+        } 
+
+        $lichSu = new LichSu();
+        $lichSu->dat_san_id = $datSan->id;
+        $lichSu->tg_bat_dau_cu = $datSan->tg_bat_dau;
+        $lichSu->tg_ket_thuc_cu = $datSan->tg_ket_thuc;
+        $lichSu->tong_tien_cu = $datSan->tong_tien;
+        $lichSu->save();
+        
         $datSan->tg_bat_dau = null; 
         $datSan->tg_ket_thuc = null; 
         $datSan->trang_thai_dat_san_id = 3;

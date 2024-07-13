@@ -45,9 +45,27 @@
                     <td>{{ $datSan->user->ho_ten }}</td>
                     <td>{{ $datSan->san_bong->ten_san }}</td>
                     <td>{{ $datSan->ngay_dat }}</td>
-                    <td>{{ $datSan->tg_bat_dau }}</td>
-                    <td>{{ $datSan->tg_ket_thuc }}</td>
-                    <td>{{ number_format($datSan->tong_tien) }}</td>
+                    <td>
+                        @if ($datSan->tg_bat_dau)
+                            {{ $datSan->tg_bat_dau }}
+                        @else
+                        <span class="badge bg-danger"> Thời gian đã bị huỷ</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($datSan->tg_ket_thuc)
+                            {{ $datSan->tg_ket_thuc }}
+                        @else
+                        <span class="badge bg-danger">Thời gian đã bị huỷ</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($datSan->tong_tien)
+                            {{ number_format($datSan->tong_tien) }}
+                        @else
+                        <span class="badge bg-danger">Đã bị huỷ</span>
+                        @endif
+                    </td>
                     <td>{{ $datSan->trang_thai_thanh_toan->trang_thai }}</td>
                     <td>
                         @if($datSan->trang_thai_dat_san_id == 1)
@@ -61,7 +79,7 @@
                         @endif
                     </td>
                     <td>
-                        @if($datSan->trang_thai_dat_san->trang_thai !== 3 && $datSan->trang_thai_dat_san->trang_thai !== 4)
+                        @if($datSan->trang_thai_dat_san_id != 3 && $datSan->trang_thai_dat_san_id != 2)
                         <form method="post" action="{{ route('admin.thay-doi-trang-thai', ['id' => $datSan->id]) }}">
                             @csrf
                             @method('put')
@@ -74,10 +92,10 @@
                             </select>
                         </form>
                         @else
-                        @if($datSan->trang_thai_dat_san->trang_thai == 2)
-                        <label for="">Đã Hoàn Thành</label>
-                        @elseif($datSan->trang_thai_dat_san->trang_thai == 3)
-                        <label for="">Đã Hủy</label>
+                        @if($datSan->trang_thai_dat_san_id == 2)
+                        <span class="badge bg-success">Đã Hoàn Thành</span>
+                        @elseif($datSan->trang_thai_dat_san_id == 3)
+                        <span class="badge bg-danger">Đã Hủy</span>
                         @endif
                         @endif
                     </td>

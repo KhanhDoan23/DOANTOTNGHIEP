@@ -21,6 +21,7 @@
                         <label for="thoi_gian_ket_thuc">Thời gian kết thúc</label>
                         <input type="datetime-local" id="thoi_gian_ket_thuc" name="tg_ket_thuc" class="form-control" step="1800" required>
                     </div>
+                        <button style="margin-top: 10px;margin-bottom:10px;" type="submit" class="btn btn-primary">Đặt sân</button>
                         <h5>Thời gian còn trống</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -47,7 +48,7 @@
                             </div>
                         @endif
 
-                        <button type="submit" class="btn btn-primary">Đặt sân</button>
+                       
                     </form>
                 </div>
             </div>
