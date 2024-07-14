@@ -26,6 +26,7 @@ class ThanhToanController extends Controller
         }
         $cacLanThanhToan = $query->paginate($Page);
         $dsDatSan = QuanLyDatSan::with('thanhToan');
+        $dsDatSan->orderByDesc('ngay_dat');
         if ($trangThaiThanhToan) {
             $dsDatSan->whereHas('thanhToan', function ($query) use ($trangThaiThanhToan) {
                 if ($trangThaiThanhToan == '1') {

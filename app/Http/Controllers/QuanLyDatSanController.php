@@ -8,6 +8,7 @@ use App\Models\ThanhToan;
 use App\Models\SanBong;
 use App\Models\GiaThue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 class QuanLyDatSanController extends Controller
 {
@@ -227,18 +228,23 @@ public function store(Request $request, $id)
 
         return view('admin.quan-ly-dat-san.danh-sach', compact('dsDatSan','Page','trangThai'));
     } 
-    public function thongKeSan()
+    public function thongKeSan(Request $request)
     {
         if (Gate::denies('quan-ly-thanh-toan')) {
-            return redirect()->route('admin.index')->with('error','bạn không có quyền truy cập vào chức năng này');
+            return redirect()->route('admin.index')->with('error','Bạn không có quyền truy cập vào chức năng này');
         }
-        $sanDaDat = QuanLyDatSan::where('trang_thai_dat_san_id', '<>', 3)->count();
-        $sanDaHuy = QuanLyDatSan::where('trang_thai_dat_san_id', 3)->count();
-        $nguoiDatSan = QuanLyDatSan::selectRaw('count(distinct user_id) as count')->first()->count;
-        $userDangKy = KhachHang::all()->count();
-        
-
-        return view('admin/thong-ke/thong-ke-san', compact('sanDaDat','nguoiDatSan','sanDaHuy','userDangKy'));
+        $ngayThangNam = $request->input('ngay_thang_nam');
+        if (!$ngayThangNam) {
+            $ngayThangNam = now()->toDateString();
+        }
+    
+        $ngayThangNam = Carbon::createFromFormat('Y-m-d', $ngayThangNam)->toDateString();
+        $sanDaDat = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->where('trang_thai_dat_san_id', '<>', 3)->count();
+        $sanDaHuy = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->where('trang_thai_dat_san_id', 3)->count();
+        $nguoiDatSan = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->selectRaw('count(distinct user_id) as count')->first()->count;
+        $userDangKy = KhachHang::whereDate('created_at', $ngayThangNam)->count();
+    
+        return view('admin/thong-ke/thong-ke-san', compact('sanDaDat', 'nguoiDatSan', 'sanDaHuy', 'userDangKy', 'ngayThangNam'));
     }
-
+    
 }

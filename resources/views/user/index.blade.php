@@ -36,7 +36,7 @@
                     </div>
                     <div class="text-end pe-4 me-4 border-end border-dark search-btn">
                         <div class="search-form">
-                            <form method="post" action="#">
+                            <form method="GET" action="{{route('user.dat-san.search')}}">
                                 <div class="form-group">
                                     <div class="d-flex">
                                         <input type="search" class="form-control border-0 rounded-pill" name="search-input" value="" placeholder="Search Here" required=""/>
