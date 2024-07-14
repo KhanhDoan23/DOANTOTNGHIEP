@@ -18,8 +18,13 @@
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="#" placeholder="Password" name="password">
-      <label for="floatingPassword">Mật Khẩu</label>
+      <label for="floatingPassword">Mật Khẩu</label>      
     </div>
+    @if ($message = Session::get('message'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+    @endif
     @if ($message = Session::get('thong_bao'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>

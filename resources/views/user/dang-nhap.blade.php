@@ -26,6 +26,11 @@
         @enderror
       <label for="floatingPassword">Mật Khẩu</label>
     </div>
+    @if ($message = Session::get('error'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+    @endif
     @if ($message = Session::get('thong_bao'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>
