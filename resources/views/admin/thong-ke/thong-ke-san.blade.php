@@ -2,13 +2,14 @@
 
 @section('content')
     <div class="row row-card-no-pd">
-        <div class="col-md-12">
+    <div class="col-md-12">
             <form action="{{ route('admin.thong-ke-san') }}" method="GET">
                 <div class="form-group">
                     <label for="ngay_thang_nam">Lọc ngày tháng năm:</label>
                     <input type="date" id="ngay_thang_nam" name="ngay_thang_nam" class="form-control" value="{{ $ngayThangNam ?? '' }}">
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-filter"></i>Lọc</button>
+                <a href="{{ route('admin.thong-ke-san') }}" class="btn btn-secondary"><i class="fas fa-sync"></i>Hiển thị thống kê tháng</a>
             </form>
         </div>
               <div class="col-12 col-sm-6 col-md-6 col-xl-3">

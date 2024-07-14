@@ -231,20 +231,39 @@ public function store(Request $request, $id)
     public function thongKeSan(Request $request)
     {
         if (Gate::denies('quan-ly-thanh-toan')) {
-            return redirect()->route('admin.index')->with('error','Bạn không có quyền truy cập vào chức năng này');
+            return redirect()->route('admin.index')->with('error', 'Bạn không có quyền truy cập vào chức năng này');
         }
+
         $ngayThangNam = $request->input('ngay_thang_nam');
-        if (!$ngayThangNam) {
-            $ngayThangNam = now()->toDateString();
+        $startDate = null;
+        $endDate = null;
+
+        if ($ngayThangNam) {
+            $startDate = Carbon::createFromFormat('Y-m-d', $ngayThangNam)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $ngayThangNam)->endOfDay();
+        } else {
+            $startDate = now()->startOfMonth();
+            $endDate = now()->endOfMonth();
+            $ngayThangNam = $startDate->format('Y-m-d');
         }
-    
-        $ngayThangNam = Carbon::createFromFormat('Y-m-d', $ngayThangNam)->toDateString();
-        $sanDaDat = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->where('trang_thai_dat_san_id', '<>', 3)->count();
-        $sanDaHuy = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->where('trang_thai_dat_san_id', 3)->count();
-        $nguoiDatSan = QuanLyDatSan::whereDate('ngay_dat', $ngayThangNam)->selectRaw('count(distinct user_id) as count')->first()->count;
-        $userDangKy = KhachHang::whereDate('created_at', $ngayThangNam)->count();
-    
-        return view('admin/thong-ke/thong-ke-san', compact('sanDaDat', 'nguoiDatSan', 'sanDaHuy', 'userDangKy', 'ngayThangNam'));
+
+        $sanDaDat = QuanLyDatSan::whereBetween('ngay_dat', [$startDate, $endDate])
+            ->where('trang_thai_dat_san_id', '<>', 3)
+            ->count();
+
+        $sanDaHuy = QuanLyDatSan::whereBetween('ngay_dat', [$startDate, $endDate])
+            ->where('trang_thai_dat_san_id', 3)
+            ->count();
+
+        $nguoiDatSan = QuanLyDatSan::whereBetween('ngay_dat', [$startDate, $endDate])
+            ->selectRaw('count(distinct user_id) as count')
+            ->first()->count;
+
+        $userDangKy = KhachHang::whereBetween('created_at', [$startDate, $endDate])
+            ->count();
+
+        return view('admin.thong-ke.thong-ke-san', compact('sanDaDat', 'nguoiDatSan', 'sanDaHuy', 'userDangKy', 'ngayThangNam'));
     }
+
     
 }
