@@ -83,7 +83,7 @@
                         <form method="post" action="{{ route('admin.thay-doi-trang-thai', ['id' => $datSan->id]) }}">
                             @csrf
                             @method('put')
-                            <select name="trangthai" onchange="this.form.submit()">
+                            <select name="trangthai" class="form-select" onchange="this.form.submit()">
                                 <option>Thay Đổi Trạng Thái đơn</option>
                                 <option value="1">Xác Nhận</option>
                                 <option value="2">Đã Hoàn Thành</option>

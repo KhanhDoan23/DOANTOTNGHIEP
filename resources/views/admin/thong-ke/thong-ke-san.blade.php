@@ -21,6 +21,11 @@
                         <p class="text-muted">Số lượng sân đã đặt</p>
                       </div>
                       <h4 class="text-info fw-bold">{{ $sanDaDat }}</h4>
+                      @if($sanDaDat > 0)
+                      <a href="{{ route('admin.danhsach') }}">
+                          <button class="btn btn-primary">Xem</button>
+                      </a>
+                      @endif
                     </div>
                     <div class="progress progress-sm">
                       <div
@@ -47,6 +52,11 @@
                         <p class="text-muted">Số lượng người đã đặt</p>
                       </div>
                       <h4 class="text-success fw-bold">{{ $nguoiDatSan }}</h4>
+                      @if($nguoiDatSan > 0)
+                      <a href="{{ route('admin.danhsach') }}">
+                          <button class="btn btn-success">Xem</button>
+                      </a>
+                      @endif
                     </div>
                     <div class="progress progress-sm">
                       <div
@@ -73,6 +83,11 @@
                         <p class="text-muted">Số lượng sân bị huỷ</p>
                       </div>
                       <h4 class="text-danger fw-bold">{{ $sanDaHuy }}</h4>
+                      @if($sanDaHuy > 0)
+                      <a href="{{ route('admin.danhsach') }}">
+                          <button class="btn btn-danger">Xem</button>
+                      </a>
+                      @endif
                     </div>
                     <div class="progress progress-sm">
                       <div
@@ -99,6 +114,11 @@
                         <p class="text-muted">Tổng số thành viên đã đăng ký</p>
                       </div>
                       <h4 class="text-secondary fw-bold">{{ $userDangKy}}</h4>
+                      @if($userDangKy > 0)
+                      <a href="{{ route('admin.quan-ly-user') }}">
+                          <button class="btn btn-secondary">Xem</button>
+                      </a>
+                      @endif
                     </div>
                     <div class="progress progress-sm">
                       <div

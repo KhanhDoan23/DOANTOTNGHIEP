@@ -1,0 +1,22 @@
+.form-select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 100%;
+}
+.form-select option {
+    font-size: 14px;
+}
+.form-select:hover {
+    border-color: #6c757d;
+}
+
+.form-select:focus {
+    border-color: #80bdff; 
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+}
+.form-select + button {
+    margin-left: 10px;
+}
