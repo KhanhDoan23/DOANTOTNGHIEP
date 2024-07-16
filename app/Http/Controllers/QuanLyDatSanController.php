@@ -141,7 +141,7 @@ public function store(Request $request, $id)
         $thanhToan->trang_thai_thanh_toan_id = 2;
         $thanhToan->save();
 
-        return redirect()->route('user.dat-san.hien-thi')->with('thong_bao', 'Đặt sân thành công');
+        return redirect()->route('user.dat-san.hien-thi')->with('thong_bao', 'Đặt sân thành công vui lòng thanh toán để được xác nhận');
     }
     private function tinhTongTien($tg_bat_dau, $tg_ket_thuc, $gia_thue)
     {
