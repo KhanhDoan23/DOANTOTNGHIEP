@@ -15,6 +15,7 @@ use App\Http\Controllers\TinTucController;
 use App\Models\User;
 use App\Http\Controllers\QuanLyAdminController;
 use App\Http\Controllers\ThanhToanController;
+use App\Http\Controllers\ThanhToanVNpay;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -140,6 +141,13 @@ Route::put('user/lich-su-dat/huy/{id}', [LichSuDatSanController::class, 'huyDatS
 
 Route::get('user/lien-he/lien-he', [LienHeController::class, 'ChamSocKhachHang'])->name('lien-he-ho-tro');
 
+//Thanh Toán VNPAY
+Route::POST('user/vnpay-payments/{id}', [ThanhToanVNpay::class, 'vnpay_payments'])->name('thanh-toan.vnpay');
+Route::get('/vnpay-return/{id}', [ThanhToanVNpay::class, 'vnpayReturn'])->name('vnpay.return');
 
+
+Route::get('user/thanh-toan-thanh-cong/success', function () {
+    return view('user/thanh-toan-thanh-cong/success');
+})->name('thanh-toan-thanh-cong.success');
 
 

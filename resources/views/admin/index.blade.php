@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/thaydoi.css')}}" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">  

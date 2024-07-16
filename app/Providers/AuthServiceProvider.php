@@ -72,7 +72,7 @@ class AuthServiceProvider extends ServiceProvider
         });
     
         Gate::define('quan-ly-tai-khoan-nguoi-dung', function (DangNhap $admin) {
-            if ($admin->quyen && $admin->quyen->ten_quyen === 'Quản Lý Tài Khoản Người Dùng' || $admin->quyen->ten_quyen === 'Quản Lý'  || $admin->quyen->ten_quyen === 'Admin') {
+            if ($admin->quyen && $admin->quyen->ten_quyen === 'Nhân Viên Chăm Sóc Khách Hàng' || $admin->quyen->ten_quyen === 'Nhân Viên'  || $admin->quyen->ten_quyen === 'Admin') {
                 return true;
             }
             return false;

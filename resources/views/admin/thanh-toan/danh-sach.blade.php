@@ -44,13 +44,11 @@
                         <td>{{ $datSan->user->ho_ten }}</td>
                         <td>{{ $datSan->san_bong->ten_san }}</td>
                         <td>{{ $datSan->ngay_dat }}</td>
-                        <td>
-                        @if ($datSan->tong_tien)
+                        <td> @if ($datSan->tong_tien)
                             {{ number_format($datSan->tong_tien) }}
                         @else
                         <span class="badge bg-danger">Đã bị huỷ</span>
-                        @endif
-                    </td>
+                        @endif</td>
                         <td>{{ optional($datSan->thanhToan)->ngay_thanh_toan }}</td>
                         <td>
                             @if (optional($datSan->thanhToan)->trang_thai_thanh_toan_id == 1)
