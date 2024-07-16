@@ -86,7 +86,7 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
                 <i class="fas fa-table"></i>
-                  <p>Quản lý Thông Kê</p>
+                  <p>Quản lý Thống Kê</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
@@ -203,11 +203,11 @@
           <div class="container-fluid d-flex justify-content-between">
             <div class="copyright">
               2024, made with <i class="fa fa-heart heart text-danger"></i> by
-              <a href="#">TuanKhanhCKC</a>
+              <a href="#">Nhóm 40 hđ4</a>
             </div>
             <div>
               Distributed by
-              <a target="_blank" href="#">TuanKhanhCKC</a>.
+              <a target="_blank" href="#">Nhóm 40 hđ4</a>.
             </div>
           </div>
         </footer>

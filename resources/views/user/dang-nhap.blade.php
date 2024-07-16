@@ -13,14 +13,14 @@
     <h1 class="h3 mb-3 fw-normal">Đăng Nhập</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+      <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
       @error('email')
                 <div class="alert alert-warring">{{$message}}</div>
       @enderror
       <label for="floatingInput">Email của bạn</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+      <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
         @error('password')
                 <div class="alert alert-warring">{{$message}}</div>
         @enderror

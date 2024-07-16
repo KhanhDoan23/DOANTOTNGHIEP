@@ -13,11 +13,11 @@
     <h1 class="h3 mb-3 fw-normal">Đăng Nhập</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="#" placeholder="namesignin" name="ten_dang_nhap">
+      <input type="text" class="form-control" id="#" placeholder="namesignin" name="ten_dang_nhap"required>
       <label for="floatingInput">Tên Đăng Nhập</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="#" placeholder="Password" name="password">
+      <input type="password" class="form-control" id="#" placeholder="Password" name="password"required>
       <label for="floatingPassword">Mật Khẩu</label>      
     </div>
     @if ($message = Session::get('message'))

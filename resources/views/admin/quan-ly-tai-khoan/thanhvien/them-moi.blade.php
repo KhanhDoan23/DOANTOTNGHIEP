@@ -45,7 +45,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror      
                                 </div>
-                                <label for="name" class="col-md-4 col-form-label text-md-right">chọn quyền</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Chọn quyền</label>
                                 <div class="col-md-6">
 
                                 <select name="quyen" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
