@@ -90,28 +90,36 @@ class ThanhToanController extends Controller
        
         return view('admin.thanh-toan.danh-sach', compact('cacLanThanhToan','Page','dsDatSan'));
     } 
-    public function ThongKeDoanhThu()
+    public function ThongKeDoanhThu(Request $request)
     {
         if (Gate::denies('quan-ly-thanh-toan')) {
             return redirect()->route('admin.index')->with('error','Bạn không có quyền truy cập vào chức năng này');
         }
-
-        $doanhThuTheoThang = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
+        $ngayBatDau = $request->get('ngayBatDau');
+        $ngayKetThuc = $request->get('ngayKetThuc');
+        $queryDoanhThuThang = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
                                 ->join('dat_san', 'thanh_toan.dat_san_id', '=', 'dat_san.id')
                                 ->selectRaw('YEAR(ngay_thanh_toan) AS nam, MONTH(ngay_thanh_toan) AS thang, SUM(dat_san.tong_tien) AS tong_doanh_thu')
                                 ->groupBy('nam', 'thang')
                                 ->orderBy('nam', 'desc')
-                                ->orderBy('thang', 'desc')
-                                ->get();
-
-        $doanhThuTheoNgay = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
+                                ->orderBy('thang', 'desc');
+    
+        $queryDoanhThuNgay = ThanhToan::where('thanh_toan.trang_thai_thanh_toan_id', 1)
                                 ->join('dat_san', 'thanh_toan.dat_san_id', '=', 'dat_san.id')
-                                ->selectRaw('DATE(ngay_thanh_toan) AS ngay,SUM(dat_san.tong_tien) AS tong_doanh_thu')
+                                ->selectRaw('DATE(ngay_thanh_toan) AS ngay, SUM(dat_san.tong_tien) AS tong_doanh_thu')
                                 ->groupBy('ngay')
-                                ->orderBy('ngay', 'desc')
-                                ->get();
-
+                                ->orderBy('ngay', 'desc');
+        if ($ngayBatDau) {
+            $queryDoanhThuThang->whereDate('ngay_thanh_toan', '>=', $ngayBatDau);
+            $queryDoanhThuNgay->whereDate('ngay_thanh_toan', '>=', $ngayBatDau);
+        }
+        if ($ngayKetThuc) {
+            $queryDoanhThuThang->whereDate('ngay_thanh_toan', '<=', $ngayKetThuc);
+            $queryDoanhThuNgay->whereDate('ngay_thanh_toan', '<=', $ngayKetThuc);
+        }
+        $doanhThuTheoThang = $queryDoanhThuThang->get();
+        $doanhThuTheoNgay = $queryDoanhThuNgay->get();
+    
         return view('admin/thong-ke/thong-ke', compact('doanhThuTheoThang', 'doanhThuTheoNgay'));
     }
-
 }
