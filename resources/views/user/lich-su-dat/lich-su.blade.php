@@ -21,6 +21,7 @@
                             <th>Thời gian bắt đầu</th>
                             <th>Thời gian kết thúc</th>
                             <th>Tổng tiền</th>
+                            <th>Trạng Thái Thanh Toán</th>
                             <th>Trạng thái</th>
                             <th>Thao tác</th> 
                         </tr>
@@ -54,14 +55,25 @@
                                 @endif
                             </td>
                             <td>
+                                @if ($datSan->trang_thai_thanh_toan_id == 1)
+                                <span class="badge bg-success">Đã Thanh Toán</span>
+                                @elseif ($datSan->trang_thai_thanh_toan_id == 2)
+                                <span class="badge bg-warning text-dark">Chưa Thanh Toán</span>
+                                @else
+                                <span class="badge bg-info">Đang chờ duyệt</span>
+                                @endif
+                            </td>
+                            <td>
                                 @if ($datSan->trang_thai_dat_san_id == 1)
                                 <span class="badge bg-warning text-dark">Đã Xác Nhận</span>
                                 @elseif ($datSan->trang_thai_dat_san_id == 2)
                                 <span class="badge bg-success">Đã hoàn thành</span>
                                 @elseif ($datSan->trang_thai_dat_san_id == 3)
                                 <span class="badge bg-danger">Đã hủy</span>
-                                @else
+                                @elseif($datSan->trang_thai_dat_san_id == 4 && $datSan->trang_thai_thanh_toan_id == 2)
                                 <span class="badge bg-info">Đang chờ duyệt</span>
+                                @else
+                                <span class="badge bg-warning text-dark">Đã Xác Nhận</span>
                                 @endif
                             </td>
                             <td>
@@ -72,7 +84,14 @@
                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmCancel({{ $datSan->id }})">Huỷ</button>
                                 </form>
                             @endif
-
+                            @if (($datSan->trang_thai_dat_san_id == 1 || $datSan->trang_thai_dat_san_id == 4) && $datSan->trang_thai_thanh_toan_id == 2) 
+                                <form method="POST" action="{{ route('thanh-toan.vnpay', ['id' => $datSan->id])}}">
+                                    @csrf
+                                    <input type="hidden" name="total" value="{{ number_format($datSan->tong_tien) }}">
+                                    <button type="submit" name="redirect" class="btn btn-info btn-sm">Thanh Toán VNPAY</button>
+                                </form>
+                            @endif
+                            
                             </td>
                         </tr>
                         @endforeach

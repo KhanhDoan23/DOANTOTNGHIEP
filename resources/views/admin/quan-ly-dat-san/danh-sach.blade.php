@@ -74,8 +74,10 @@
                         <span class="badge bg-success">Đã Hoàn Thành</span>
                         @elseif($datSan->trang_thai_dat_san_id == 3)
                         <span class="badge bg-danger">Đã Hủy</span>
+                        @elseif($datSan->trang_thai_dat_san_id == 4 && $datSan->trang_thai_thanh_toan_id == 2)
+                        <span class="badge bg-warning text-dark">Đang chờ duyệt</span>
                         @else
-                        <span class="badge bg-warning text-dark">Chờ Duyệt</span>
+                        <span class="badge bg-info">Đã Xác Nhận</span>
                         @endif
                     </td>
                     <td>
